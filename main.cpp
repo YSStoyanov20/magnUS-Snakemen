@@ -27,26 +27,21 @@ int main(void)
         DrawText(TextFormat("Mouse Y: %f", mousePoint.y), 10, 30, 20, BLACK);
 
         //Draw the menu button
+        
         DrawTexture(MenuButtonUnpressed, 1600/2 - width/2, 900/2 - height/2, WHITE);
 
         //detect if the mouse is over the menu button
-        if(CheckCollisionPointRec(mousePoint, {1600/2 - width/2, 900/2 - height/2, width, height}))
+        if(CheckCollisionPointRec(mousePoint, {1600/2 - width/2, 900/2 - height/2 + 4, width, height}))
         {
-            DrawTexture(MenuButtonPressed, 1600/2 - width/2, 900/2 - height/2, WHITE);
-            //remove the menu button
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            {
-                //remove the menu button
-                UnloadTexture(MenuButtonUnpressed);
-                UnloadTexture(MenuButtonPressed);
-            }
-            
+            DrawRectangle(1600/2 - width/2, 900/2 - height/2, width, height, RAYWHITE);
+            DrawTexture(MenuButtonPressed, 1600/2 - width/2, 900/2 - height/2 + 4, WHITE);
         }
-
-
-        
-            
-
+            // if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            // {
+            //     //remove the menu button
+            //     UnloadTexture(MenuButtonUnpressed);
+            //     UnloadTexture(MenuButtonPressed);
+            // }     
         EndDrawing();
     }
     CloseWindow();
