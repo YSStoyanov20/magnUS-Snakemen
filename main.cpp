@@ -65,6 +65,11 @@ int main()
         {
             DrawRectangle(1600/2 - quitWidth/2, 900/2 - height/2 + 200, quitWidth, height, RAYWHITE);
             DrawTexture(QuitButtonPressed, 1600/2 - quitWidth/2, 900/2 - height/2 + 204, WHITE);
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                //Close application
+                CloseWindow();
+            }    
         }
 
         
