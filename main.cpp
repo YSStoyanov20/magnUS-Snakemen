@@ -12,9 +12,13 @@ int main()
     Texture2D MenuButtonPressed = LoadTexture("./Sprites/Begin-Button-Pressed.png");
     Texture2D RuleButtonUnpressed = LoadTexture("./Sprites/Rules-Button-Unpressed.png");
     Texture2D RuleButtonPressed = LoadTexture("./Sprites/Rules-Button-Pressed.png");
+    Texture2D QuitButtonUnpressed = LoadTexture("./Sprites/Quit-Button-Unpressed.png");
+    Texture2D QuitButtonPressed = LoadTexture("./Sprites/Quit-Button-Pressed.png");
+
     float width = MenuButtonPressed.width;
     float height = MenuButtonPressed.height;
     float ruleWidth = RuleButtonPressed.width;
+    float quitWidth = QuitButtonPressed.width;
 
     while (!WindowShouldClose())
     {
@@ -53,6 +57,14 @@ int main()
             //     UnloadTexture(RulesButtonUnpressed);
             //     UnloadTexture(RulesButtonPressed);
             // }     
+        }
+
+
+        DrawTexture(QuitButtonUnpressed, 1600/2 - quitWidth/2, 900/2 - height/2 + 200, WHITE);
+        if(CheckCollisionPointRec(mousePoint, {1600/2 - quitWidth/2, 900/2 - height/2 + 204, quitWidth, height}))
+        {
+            DrawRectangle(1600/2 - quitWidth/2, 900/2 - height/2 + 200, quitWidth, height, RAYWHITE);
+            DrawTexture(QuitButtonPressed, 1600/2 - quitWidth/2, 900/2 - height/2 + 204, WHITE);
         }
 
         
