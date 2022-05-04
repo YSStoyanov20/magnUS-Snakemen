@@ -1,5 +1,5 @@
 SRCDIR=../src
-_SRC=mainMenu.cpp gei.cpp
+_SRC=mainMenu.cpp
 SRC=$(patsubst %, $(SRCDIR)/%, $(_SRC))
 
 OUTPUT=Booleo.exe

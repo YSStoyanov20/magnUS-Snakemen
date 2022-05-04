@@ -1,36 +1,60 @@
 #include "raylib.h"
 #include "mainMenu.h"
+namespace mainMenu{
+    bool isInMainMenu = true;
+    bool texturesLoaded = false;
 
+    Texture2D MenuButtonUnpressed;
+    Texture2D MenuButtonPressed;
+    Texture2D RuleButtonUnpressed;
+    Texture2D RuleButtonPressed;
+    Texture2D QuitButtonUnpressed;
+    Texture2D QuitButtonPressed;
 
-void loadMainMenu(bool isInMainMenu)
-{
-    // Texture2D AndZeroCard = LoadTexture("./Sprites/AndZeroCard.png");
-    Texture2D MenuButtonUnpressed = LoadTexture("./Sprites/Begin-Button-Unpressed.png");
-    Texture2D MenuButtonPressed = LoadTexture("./Sprites/Begin-Button-Pressed.png");
-    Texture2D RuleButtonUnpressed = LoadTexture("./Sprites/Rules-Button-Unpressed.png");
-    Texture2D RuleButtonPressed = LoadTexture("./Sprites/Rules-Button-Pressed.png");
-    Texture2D QuitButtonUnpressed = LoadTexture("./Sprites/Quit-Button-Unpressed.png");
-    Texture2D QuitButtonPressed = LoadTexture("./Sprites/Quit-Button-Pressed.png");
-
-    float width = MenuButtonPressed.width;
-    float height = MenuButtonPressed.height;
-    float ruleWidth = RuleButtonPressed.width;
-    float quitWidth = QuitButtonPressed.width;
-
-    while (!WindowShouldClose())
+    float width;
+    float height;
+    float ruleWidth;
+    float quitWidth;
+    
+    void loadTextures()
     {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-
-        //Get mouse position
-        Vector2 MousePosition = GetMousePosition();
-        Vector2 mousePoint = {MousePosition.x, MousePosition.y};
-        
-        //Display the values of the mouse position
-        DrawText(TextFormat("%0.f, %0.f", mousePoint.x,mousePoint.y), 10, 10, 20, BLACK);
-
+        MenuButtonUnpressed = LoadTexture("./Sprites/Begin-Button-Unpressed.png");
+        MenuButtonPressed = LoadTexture("./Sprites/Begin-Button-Pressed.png");
+        RuleButtonUnpressed = LoadTexture("./Sprites/Rules-Button-Unpressed.png");
+        RuleButtonPressed = LoadTexture("./Sprites/Rules-Button-Pressed.png");
+        QuitButtonUnpressed = LoadTexture("./Sprites/Quit-Button-Unpressed.png");
+        QuitButtonPressed = LoadTexture("./Sprites/Quit-Button-Pressed.png");
+        width = MenuButtonPressed.width;
+        height = MenuButtonPressed.height;
+        ruleWidth = RuleButtonPressed.width;
+        quitWidth = QuitButtonPressed.width;
+        texturesLoaded = true;
+    }
+    void unloadTextures()
+    {
+        UnloadTexture(MenuButtonUnpressed);
+        UnloadTexture(MenuButtonPressed);
+        UnloadTexture(RuleButtonUnpressed);
+        UnloadTexture(RuleButtonPressed);
+        UnloadTexture(QuitButtonUnpressed);
+        UnloadTexture(QuitButtonPressed);
+    }
+    void loadMainMenu()
+    {
         if(isInMainMenu)
         {
+            if(!texturesLoaded)
+            {
+                loadTextures();
+            }
+
+            //Get mouse position
+            Vector2 MousePosition = GetMousePosition();
+            Vector2 mousePoint = {MousePosition.x, MousePosition.y};
+            
+            //Display the values of the mouse position
+            DrawText(TextFormat("%0.f, %0.f", mousePoint.x,mousePoint.y), 10, 10, 20, BLACK);
+
             //Draw the menu button
             DrawTexture(MenuButtonUnpressed, 1600/2 - width/2, 900/2 - height/2, WHITE);
             //Detect if the mouse is over the menu button
@@ -40,13 +64,11 @@ void loadMainMenu(bool isInMainMenu)
                 DrawTexture(MenuButtonPressed, 1600/2 - width/2, 900/2 - height/2 + 4, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
+                    unloadTextures();
                     isInMainMenu = false;
                 }     
             }
-        }
 
-        if(isInMainMenu)
-        {
             //Draw the rules button
             DrawTexture(RuleButtonUnpressed, 1600/2 - ruleWidth/2, 900/2 - height/2 + 100, WHITE);
             //Detect if the mouse is over the rules button
@@ -54,16 +76,13 @@ void loadMainMenu(bool isInMainMenu)
             {
                 DrawRectangle(1600/2 - ruleWidth/2, 900/2 - height/2 + 100, ruleWidth, height, RAYWHITE);
                 DrawTexture(RuleButtonPressed, 1600/2 - ruleWidth/2, 900/2 - height/2 + 104, WHITE);
-                // if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                // {
-                //     UnloadTexture(RulesButtonUnpressed);
-                //     UnloadTexture(RulesButtonPressed);
-                // }     
+                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    unloadTextures();
+                    isInMainMenu = false;
+                }     
             }
-        }
 
-        if(isInMainMenu)
-        {
             //Draw the quit button
             DrawTexture(QuitButtonUnpressed, 1600/2 - quitWidth/2, 900/2 - height/2 + 200, WHITE);
             //Detect if the mouse is over the quit button
@@ -79,8 +98,5 @@ void loadMainMenu(bool isInMainMenu)
             }
         }
 
-        
-        EndDrawing();
     }
-    CloseWindow();
-}
+};

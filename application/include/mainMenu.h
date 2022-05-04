@@ -1,4 +1,10 @@
 #pragma once
 #include "raylib.h"
 
-void loadMainMenu(bool isInMainMenu);
+namespace mainMenu{
+    void loadTextures();
+    void unloadTextures();
+    void loadMainMenu();
+
+
+};

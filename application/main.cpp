@@ -6,6 +6,13 @@ int main()
     SetConfigFlags(FLAG_VSYNC_HINT);
     InitWindow(1600, 900, "Booleo");
 
-    //Load the main menu
-    loadMainMenu(true);
+    while (!WindowShouldClose())
+    {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        //Load the main menu
+        mainMenu::loadMainMenu();
+        EndDrawing();
+    }
+    CloseWindow();
 }
