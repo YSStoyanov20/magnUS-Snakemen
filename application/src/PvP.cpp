@@ -12,7 +12,6 @@ namespace PvP{
     Texture2D xorCard_0;
     Texture2D xorCard_1;
 
-
     float cardWidth;
     float cardHeight;
 
@@ -61,18 +60,18 @@ namespace PvP{
     }
     void drawInitialBinary()
     {
+        //Set initial binary position
+        Vector2 initialBinaryPos = {GetScreenWidth()/2 - cardWidth*3, GetScreenHeight()/2 - cardHeight/2};
         for(int i = 0, spaceBetween = 0; i<6;i++)
         {
-            float binaryPosX = GetScreenWidth()/3.7 - cardWidth/2;
-            float binaryPosY = GetScreenHeight()/2 - cardHeight/2;
-            DrawRectangle(binaryPosX + spaceBetween, binaryPosY, cardWidth, cardHeight, BLACK);
+            DrawRectangle(initialBinaryPos.x  + spaceBetween, initialBinaryPos.y, cardWidth, cardHeight, BLACK);
             if(initialBinaries[i]==0)
             {
-                DrawTexture(initialBinary, binaryPosX + spaceBetween, binaryPosY, WHITE);
+                DrawTexture(initialBinary, initialBinaryPos.x  + spaceBetween, initialBinaryPos.y, WHITE);
             }
             else
             {
-                DrawTexture(initialBinaryFlipped, binaryPosX + spaceBetween, binaryPosY, WHITE);
+                DrawTexture(initialBinaryFlipped, initialBinaryPos.x  + spaceBetween, initialBinaryPos.y, WHITE);
             }
             spaceBetween+=cardWidth+10;
         }
@@ -81,12 +80,11 @@ namespace PvP{
     {
         if(isInPvP)
         {
-            //Get mouse position
-            Vector2 MousePosition = GetMousePosition();
-            Vector2 mousePoint = {MousePosition.x, MousePosition.y};
-            
-            //Display the values of the mouse position
-            DrawText(TextFormat("%0.f, %0.f", mousePoint.x,mousePoint.y), 10, 10, 20, BLACK);
+            //Get mouse position            
+            Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
+
+            //Display mouse position
+            DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
 
             //Load the textures if not loaded
             if(!texturesLoaded)
@@ -102,7 +100,6 @@ namespace PvP{
             {
                 isInPvP = false;
                 mainMenu::isInMainMenu = true;
-
             }
         }
     }
