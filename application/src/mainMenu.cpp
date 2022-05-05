@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include "mainMenu.h"
 namespace mainMenu{
     bool isInMainMenu = true;
@@ -38,6 +37,7 @@ namespace mainMenu{
         UnloadTexture(RuleButtonPressed);
         UnloadTexture(QuitButtonUnpressed);
         UnloadTexture(QuitButtonPressed);
+        texturesLoaded = false;
     }
     void loadMainMenu()
     {
@@ -45,6 +45,7 @@ namespace mainMenu{
         {
             if(!texturesLoaded)
             {
+                PvP::unloadTextures();
                 loadTextures();
             }
 
@@ -66,6 +67,7 @@ namespace mainMenu{
                 {
                     unloadTextures();
                     isInMainMenu = false;
+                    PvP::isInPvP = true;
                 }     
             }
 
@@ -97,6 +99,9 @@ namespace mainMenu{
                 }    
             }
         }
-
+        if(PvP::isInPvP)
+        {
+            PvP::setCards();
+        }
     }
 };
