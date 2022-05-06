@@ -1,4 +1,6 @@
 #include "PvP.h"
+#include <time.h>
+
 namespace PvP{
     bool texturesLoaded = false;
     bool isInPvP = false;
@@ -19,8 +21,8 @@ namespace PvP{
 
     void loadTextures()
     {
-        initialBinary = LoadTexture("./Sprites/Initial-Binary-Card.png");
-        initialBinaryFlipped = LoadTexture("./Sprites/Initial-Binary-Card-Flipped.png");
+        initialBinary = LoadTexture("./Sprites/Initial-Binaries-Reverse.png");
+        initialBinaryFlipped = LoadTexture("./Sprites/Initial-Binaries.png");
         andCard_0 = LoadTexture("./Sprites/And-Zero-Card.png");
         andCard_1 = LoadTexture("./Sprites/And-One-Card.png");
         orCard_0 = LoadTexture("./Sprites/Or-Zero-Card.png");
@@ -64,7 +66,6 @@ namespace PvP{
         Vector2 initialBinaryPos = {GetScreenWidth()/2 - cardWidth*3, GetScreenHeight()/2 - cardHeight/2};
         for(int i = 0, spaceBetween = 0; i<6;i++)
         {
-            DrawRectangle(initialBinaryPos.x  + spaceBetween, initialBinaryPos.y, cardWidth, cardHeight, BLACK);
             if(initialBinaries[i]==0)
             {
                 DrawTexture(initialBinary, initialBinaryPos.x  + spaceBetween, initialBinaryPos.y, WHITE);
