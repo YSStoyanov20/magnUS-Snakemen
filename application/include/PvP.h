@@ -1,7 +1,8 @@
 #pragma once
-#include "raylib.h"
 #include "mainMenu.h"
 #include <iostream>
+#include <time.h>
+#include <vector>
 namespace PvP{
     void loadTextures();
     void unloadTextures();
