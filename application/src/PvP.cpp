@@ -1,8 +1,13 @@
 #include "PvP.h"
 namespace PvP{
+    //set the table as a background
+
+
     bool texturesLoaded = false;
     bool isInPvP = false;
 
+    Texture2D table;
+    Texture2D deck;
     Texture2D initialBinary;
     Texture2D initialBinaryFlipped;
     Texture2D andCard0;
@@ -30,6 +35,8 @@ namespace PvP{
 
     void loadTextures()
     {
+        deck = LoadTexture("./Sprites/Deck.png");
+        table = LoadTexture("./Sprites/Table.png");
         initialBinary = LoadTexture("./Sprites/Initial-Binaries-Reverse.png");
         initialBinaryFlipped = LoadTexture("./Sprites/Initial-Binaries.png");
         andCard0 = LoadTexture("./Sprites/And-Zero-Card.png");
@@ -54,6 +61,7 @@ namespace PvP{
     }
     void unloadTextures()
     {
+
         UnloadTexture(initialBinary);
         UnloadTexture(initialBinaryFlipped);
         UnloadTexture(andCard0);
@@ -62,6 +70,8 @@ namespace PvP{
         UnloadTexture(orCard1);
         UnloadTexture(xorCard0);
         UnloadTexture(xorCard1);
+        UnloadTexture(table);
+        UnloadTexture(deck);
         texturesLoaded = false;
     }
     void randomizeInitialBinary()
@@ -94,7 +104,7 @@ namespace PvP{
             {
                 DrawTextureEx(initialBinaryFlipped, initialBinaryPos, 0, 1, WHITE);
             }
-            initialBinaryPos.x+=cardWidth+2;
+            initialBinaryPos.x+=cardWidth+5;
         }
     }
     void randomizePlayerCards()
@@ -170,6 +180,15 @@ namespace PvP{
         }
 
     }
+    void DrawTable()
+    {
+        DrawTexture(table, 0, 0, WHITE);
+        DrawRectangleLinesEx({GetScreenWidth()/2 - cardWidth*3 - 5, GetScreenHeight()/2 - cardHeight/2 - 5, cardWidth*6 + 35, cardHeight + 10}, 2.6, WHITE);
+    }
+    void DrawDeck()
+    {
+        DrawTexture(deck, 144, 750, WHITE);
+    }
     void drawPlayerCards()
     {
         //Set player 1 cards position
@@ -206,7 +225,8 @@ namespace PvP{
                 randomizeInitialBinary();
                 randomizePlayerCards();
             }
-            
+            DrawTable();
+            DrawDeck();
             drawInitialBinary();
             drawPlayerCards();
             
@@ -236,6 +256,7 @@ namespace PvP{
             //     pos2.y+=cardHeight-60;
             //     row--;
             // }
+
 
             //If escape key pressed return back to Main Menu
             if(IsKeyPressed(KEY_ESCAPE))
