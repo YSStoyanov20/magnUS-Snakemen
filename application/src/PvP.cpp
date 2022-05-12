@@ -251,7 +251,31 @@ namespace PvP{
         //Draw player 1's cards
         for(size_t i = 0; i<player1Cards.size();i++)
         {
-            DrawTextureEx(player1Cards[i], player1CardsPos, 0, 1, WHITE);
+            if(playerTurn)
+            {
+                DrawTextureEx(player1Cards[i], player1CardsPos, 0, 1, WHITE);
+                //Check if mouse is over a card
+                if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}))
+                {
+                    DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
+                    if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                    {
+                        selectedCard = i;
+                        std::cout<<player1Cards[i].id<<std::endl;
+                    }
+                }
+                //Check if card is selected
+                if(int(i) == selectedCard)
+                {
+                    //Outline selected card
+                    DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, ORANGE);
+                }
+            }
+            else
+            {
+                //If it is not player's turn, draw the card face down
+                DrawTextureEx(deck, player1CardsPos, 0, 1, WHITE);
+            }
             player1CardsPos.x+=cardWidth+5;
         }
 
@@ -289,27 +313,72 @@ namespace PvP{
             player2CardsPos.x+=cardWidth+5;
         }
     }
-    void drawPlayer2Pyramid(Vector2 MousePos)
+    void drawPyramids(Vector2 MousePos)
     {
+        //Set player 1 pyramids position
+        Vector2 pyramidPos1 = {0, GetScreenHeight()/2 - cardHeight/2 - 5};
+
+        //Draw player 1's pyramid
+        for(int i = 0, spaceBetween = 40, row = 5;i < 5;i++)
+        {
+            pyramidPos1.x = GetScreenWidth()/2 - cardWidth - spaceBetween;
+            for(int j = 0;j < row; j++)
+            {
+                if(((row == 5 && player1Pyramid[i][j].id == 0) || (player1Pyramid[i-1][j].id != 0 && player1Pyramid[i-1][j+1].id != 0)) && playerTurn)
+                {
+                //If card can be placed, draw a rectangle
+                DrawRectangle(pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight, BLACK);
+
+                //Check if mouse is over a rectangle
+                if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
+                {
+                    //Outline selected card
+                    DrawRectangleLinesEx({pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}, 2.6, RED);
+                    if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                    {
+                        //Set selected card
+                        selectedPyramidPos[0] = i;
+                        selectedPyramidPos[1] = j;
+                    }
+                }
+            }
+            //Check if card is selected
+            if(selectedPyramidPos[0] == i && selectedPyramidPos[1] == j && playerTurn)
+            {
+                //Outline selected card
+                DrawRectangleLinesEx({pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}, 2.6, ORANGE);
+            }
+            if(player1Pyramid[i][j].id!=0)
+                {
+                    //Draw the card if placed
+                    DrawTextureEx(player1Pyramid[i][j], pyramidPos1, 180, 1, WHITE);
+                }
+                pyramidPos1.x+=cardWidth+2;
+                }
+                spaceBetween-=45;
+                pyramidPos1.y-=cardHeight-60;
+                row--;
+        }
+
         //Set player 2 pyramid position
-        Vector2 pos2 = {0, GetScreenHeight()/2 + cardHeight/2 + 2};
+        Vector2 pyramidPos2 = {0, GetScreenHeight()/2 + cardHeight/2 + 5};
 
         //Draw player 2 pyramid
         for(int i = 0, spaceBetween = 40, row = 5;i < 5;i++)
         {
-            pos2.x = GetScreenWidth()/2 - cardWidth*2 - spaceBetween;
+            pyramidPos2.x = GetScreenWidth()/2 - cardWidth*2 - spaceBetween;
             for(int j = 0;j < row; j++)
             {
-                if((row == 5 && player2Pyramid[i][j].id == 0) || (player2Pyramid[i-1][j].id != 0 && player2Pyramid[i-1][j+1].id != 0))
+                if(((row == 5 && player2Pyramid[i][j].id == 0) || (player2Pyramid[i-1][j].id != 0 && player2Pyramid[i-1][j+1].id != 0)) && !playerTurn)
                 {
                     //If card can be placed, draw a rectangle
-                    DrawRectangle(pos2.x, pos2.y, cardWidth, cardHeight, BLACK);
+                    DrawRectangle(pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight, BLACK);
 
                     //Check if mouse is over a rectangle
-                    if(CheckCollisionPointRec(MousePos, {pos2.x, pos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
+                    if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
                     {
                         //Outline selected card
-                        DrawRectangleLinesEx({pos2.x, pos2.y, cardWidth, cardHeight}, 2.6, RED);
+                        DrawRectangleLinesEx({pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}, 2.6, RED);
                         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                         {
                             //Set selected card
@@ -319,24 +388,23 @@ namespace PvP{
                     }
                 }
                 //Check if card is selected
-                if(selectedPyramidPos[0] == i && selectedPyramidPos[1] == j)
+                if(selectedPyramidPos[0] == i && selectedPyramidPos[1] == j && !playerTurn)
                 {
                     //Outline selected card
-                    DrawRectangleLinesEx({pos2.x, pos2.y, cardWidth, cardHeight}, 2.6, ORANGE);
+                    DrawRectangleLinesEx({pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}, 2.6, ORANGE);
                 }
                 if(player2Pyramid[i][j].id!=0)
                 {
                     //Draw the card if placed
-                    DrawTextureEx(player2Pyramid[i][j], pos2, 0, 1, WHITE);
+                    DrawTextureEx(player2Pyramid[i][j], pyramidPos2, 0, 1, WHITE);
                 }
-                DrawText(TextFormat("%d,%d", i, j), pos2.x, pos2.y, 20, WHITE);
-                //DrawTextureEx(andCard0, pos2, 0, 1, WHITE);
-                pos2.x+=cardWidth+2;
+                pyramidPos2.x+=cardWidth+2;
             }
             spaceBetween-=45;
-            pos2.y+=cardHeight-60;
+            pyramidPos2.y+=cardHeight-60;
             row--;
         }
+
     }
     void placeCard()
     {
@@ -362,6 +430,10 @@ namespace PvP{
             //Change player turn
             playerTurn = !playerTurn;
         }
+        for(int i = 0;i<300;i++)
+        {
+            DrawText("Card or position not selected", GetScreenWidth()/2, GetScreenHeight()/2, 20, RED);
+        }
         //Reset the selected card
         selectedCard = -1;
         //Reset the selected pyramid position
@@ -383,11 +455,12 @@ namespace PvP{
                 randomizeInitialBinary();
                 randomizePlayerCards();
             }
+
             DrawTable();
             DrawDeck();
             drawInitialBinary();
             drawPlayerCards(MousePos);
-            drawPlayer2Pyramid(MousePos);
+            drawPyramids(MousePos);
 
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
@@ -416,32 +489,6 @@ namespace PvP{
                     
                 }
             }
-            // if(player2Turn)
-            // {
-
-            // }
-            // Vector2 pos = {0, GetScreenHeight()/2 - cardHeight/2 - 2};
-            // for(int i = 0, a = 40, row = 5;i < 5;i++)
-            // {
-            //     pos.x = GetScreenWidth()/2 - cardWidth - a;
-            //     for(int j = 0;j < row; j++)
-            //     {
-            //         if(row == 5)
-            //         {
-                        
-            //         }
-            //         else if(player2Pyramid[i-1][j] == 1 && player2Pyramid[i-1][j+1] == 1)
-            //         {
-            //             //DrawRectangle(pos.x, pos.y, cardWidth, cardHeight, BLACK);
-            //         //DrawTextureEx(andCard1, pos, 180, 1, WHITE);
-            //         }
-            //         pos.x+=cardWidth+2;
-            //     }
-            //     a-=45;
-            //     pos.y-=cardHeight-60;
-            //     row--;
-            // }
-
 
             //If escape key pressed return back to Main Menu
             if(IsKeyPressed(KEY_ESCAPE))
