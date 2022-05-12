@@ -6,6 +6,7 @@ int main()
     //Window initialization
     SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
     InitWindow(1600, 900, "Booleo");
+    MaximizeWindow();
 
     //Remove exit key
     SetExitKey(KEY_NULL);
