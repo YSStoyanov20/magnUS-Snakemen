@@ -438,19 +438,19 @@ namespace PvP{
                     int card2ID = player1Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]+1].id;
                     if(card1ID%2==0)
                     {
-                        card1Value = 0;
+                        card1Value = 1;
                     }
                     else if(card1ID%2!=0)
                     {
-                        card1Value = 1;
+                        card1Value = 0;
                     }
                     if(card2ID%2==0)
                     {
-                        card2Value = 0;
+                        card2Value = 1;
                     }
                     else if(card2ID%2!=0)
                     {
-                        card2Value = 1;
+                        card2Value = 0;
                     }
                     std::cout<<card1Value<<" "<<card2Value<<std::endl;
                 }
@@ -505,19 +505,19 @@ namespace PvP{
                     int card2ID = player2Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]+1].id;
                     if(card1ID%2==0)
                     {
-                        card1Value = 0;
+                        card1Value = 1;
                     }
                     else if(card1ID%2!=0)
                     {
-                        card1Value = 1;
+                        card1Value = 0;
                     }
                     if(card2ID%2==0)
                     {
-                        card2Value = 0;
+                        card2Value = 1;
                     }
                     else if(card2ID%2!=0)
                     {
-                        card2Value = 1;
+                        card2Value = 0;
                     }
                     std::cout<<card1Value<<" "<<card2Value<<std::endl;
                 }
