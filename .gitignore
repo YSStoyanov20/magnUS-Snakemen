@@ -363,3 +363,4 @@ MigrationBackup/
 
 # Built Visual Studio Code Extensions
 *.vsix
+docs
