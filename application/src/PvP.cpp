@@ -95,7 +95,7 @@ namespace PvP{
         selectedPyramidPos[1] = -1;
 
         //Reset player turn
-        playerTurn = false;
+        playerTurn = true;
 
         texturesLoaded = true;
     }
@@ -329,6 +329,8 @@ namespace PvP{
                 //If card can be placed, draw a rectangle
                 DrawRectangle(pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight, BLACK);
 
+                DrawText(TextFormat("%d,%d",i,j), pyramidPos1.x, pyramidPos1.y, 20, WHITE);
+
                 //Check if mouse is over a rectangle
                 if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
                 {
@@ -374,6 +376,8 @@ namespace PvP{
                     //If card can be placed, draw a rectangle
                     DrawRectangle(pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight, BLACK);
 
+                    DrawText(TextFormat("%d,%d",i,j), pyramidPos2.x, pyramidPos2.y, 20, WHITE);
+
                     //Check if mouse is over a rectangle
                     if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
                     {
@@ -411,29 +415,158 @@ namespace PvP{
         //Check if player has selected a card and a pyramid position
         if(selectedCard != -1 && selectedPyramidPos[0] != -1 && selectedPyramidPos[1] != -1)
         {
+            //Initialize card values
+            bool card1Value = false;
+            bool card2Value = false;
+            bool validCard = false;
+            
+
+
             //Check if it is player 1's turn
             if(playerTurn)
             {
-                //Place card in player 1's pyramid
-                player1Pyramid[selectedPyramidPos[0]][selectedPyramidPos[1]] = player1Cards[selectedCard];
-                //Remove card from player 1's hand
-                player1Cards.erase(player1Cards.begin()+selectedCard);
+                int id = player1Cards[selectedCard].id;;
+                if(selectedPyramidPos[0] == 0)
+                {
+                    card1Value = bool(!initialBinaries[selectedPyramidPos[1]]);
+                    card2Value = bool(!initialBinaries[selectedPyramidPos[1]+1]);
+                    std::cout << card1Value << " " << card2Value << std::endl;
+                }
+                if(selectedPyramidPos[0] != 0)
+                {
+                    int card1ID = player1Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]].id;
+                    int card2ID = player1Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]+1].id;
+                    if(card1ID%2==0)
+                    {
+                        card1Value = 0;
+                    }
+                    else if(card1ID%2!=0)
+                    {
+                        card1Value = 1;
+                    }
+                    if(card2ID%2==0)
+                    {
+                        card2Value = 0;
+                    }
+                    else if(card2ID%2!=0)
+                    {
+                        card2Value = 1;
+                    }
+                    std::cout<<card1Value<<" "<<card2Value<<std::endl;
+                }
+                if((id == 7) && !(card1Value && card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 8) && (card1Value && card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 9) && !(card1Value || card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 10) && (card1Value || card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 11) && !(card1Value ^ card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 12) && (card1Value ^ card2Value))
+                {
+                    validCard = true;
+                }
+
+                
+                if(validCard)
+                {
+                    //Place card in player 1's pyramid
+                    player1Pyramid[selectedPyramidPos[0]][selectedPyramidPos[1]] = player1Cards[selectedCard];
+                    //Remove card from player 1's hand
+                    player1Cards.erase(player1Cards.begin()+selectedCard);
+                }
             }
             //Check if it is player 2's turn
             if(!playerTurn)
             {
-            //Place card in player 2's pyramid
-            player2Pyramid[selectedPyramidPos[0]][selectedPyramidPos[1]] = player2Cards[selectedCard];
-            //Remove card from player 2's hand
-            player2Cards.erase(player2Cards.begin()+selectedCard);
+                int id = player2Cards[selectedCard].id;
+                if(selectedPyramidPos[0] == 0)
+                {
+                    card1Value = bool(initialBinaries[selectedPyramidPos[1]]);
+                    card2Value = bool(initialBinaries[selectedPyramidPos[1]+1]);
+                    std::cout << card1Value << " " << card2Value << std::endl;
+                }
+
+                if(selectedPyramidPos[0] != 0)
+                {
+                    int card1ID = player2Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]].id;
+                    int card2ID = player2Pyramid[selectedPyramidPos[0]-1][selectedPyramidPos[1]+1].id;
+                    if(card1ID%2==0)
+                    {
+                        card1Value = 0;
+                    }
+                    else if(card1ID%2!=0)
+                    {
+                        card1Value = 1;
+                    }
+                    if(card2ID%2==0)
+                    {
+                        card2Value = 0;
+                    }
+                    else if(card2ID%2!=0)
+                    {
+                        card2Value = 1;
+                    }
+                    std::cout<<card1Value<<" "<<card2Value<<std::endl;
+                }
+
+                if((id == 7) && !(card1Value && card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 8) && (card1Value && card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 9) && !(card1Value || card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 10) && (card1Value || card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 11) && !(card1Value ^ card2Value))
+                {
+                    validCard = true;
+                }
+                if((id == 12) && (card1Value ^ card2Value))
+                {
+                    validCard = true;
+                }
+
+                
+                if(validCard)
+                {
+                    //Place card in player 1's pyramid
+                    player2Pyramid[selectedPyramidPos[0]][selectedPyramidPos[1]] = player2Cards[selectedCard];
+                    //Remove card from player 1's hand
+                    player2Cards.erase(player2Cards.begin()+selectedCard);
+                }
             }
             //Change player turn
-            playerTurn = !playerTurn;
+            if(validCard)
+            {
+                playerTurn = !playerTurn;
+            }
         }
         for(int i = 0;i<300;i++)
         {
             DrawText("Card or position not selected", GetScreenWidth()/2, GetScreenHeight()/2, 20, RED);
         }
+
         //Reset the selected card
         selectedCard = -1;
         //Reset the selected pyramid position
@@ -465,28 +598,14 @@ namespace PvP{
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
 
-            DrawRectangle(10, 300, 50, 50, BLACK);
 
-            if(CheckCollisionPointRec(MousePos, {10, 300, 50, 50}))
-            {
-
-                DrawRectangle(10, 300, 50, 50, BLUE);
-
-                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    playerTurn = false;
-                }
-            }
             DrawRectangle(1100,250,100,50,BLACK);
             if(CheckCollisionPointRec(MousePos, {1100,250,100,50}))
             {
                 DrawRectangle(1100,250,100,50,BLUE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
-                    
-                    
                         placeCard();
-                    
                 }
             }
 
