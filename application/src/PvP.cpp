@@ -18,6 +18,7 @@ namespace PvP{
     Texture2D placeCardButtonPressed;
     Texture2D discardCardButton;
     Texture2D discardCardButtonPressed;
+    Texture2D placeHolder;
 
     //Initialize deck vectors
     std::vector<Texture2D> andCards0;
@@ -66,6 +67,7 @@ namespace PvP{
         orCard1 = LoadTexture("./Sprites/Or-One-Card.png"); // ID = 10
         xorCard0 = LoadTexture("./Sprites/XOR-Zero-Card.png"); // ID = 11
         xorCard1 = LoadTexture("./Sprites/XOR-One-Card.png"); // ID = 12
+        placeHolder = LoadTexture("./Sprites/placeHolder-Card.png");
         placeCardButton = LoadTexture("./Sprites/Place-Button-Unpressed.png");
         placeCardButtonPressed = LoadTexture("./Sprites/Place-Button-Pressed.png");
         discardCardButton = LoadTexture("./Sprites/Discard-Button-Unpressed.png");
@@ -406,8 +408,7 @@ namespace PvP{
             {
                 if(((row == 5 && player1Pyramid[i][j].id == 0) || (player1Pyramid[i-1][j].id != 0 && player1Pyramid[i-1][j+1].id != 0)) && playerTurn)
                 {
-                //If card can be placed, draw a rectangle
-                DrawRectangle(pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight, BLACK);
+                DrawTexture(placeHolder, pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, WHITE);
 
                 //Check if mouse is over a rectangle
                 if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
@@ -452,8 +453,7 @@ namespace PvP{
             {
                 if(((row == 5 && player2Pyramid[i][j].id == 0) || (player2Pyramid[i-1][j].id != 0 && player2Pyramid[i-1][j+1].id != 0)) && !playerTurn)
                 {
-                    //If card can be placed, draw a rectangle
-                    DrawRectangle(pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight, BLACK);
+                    DrawTexture(placeHolder, pyramidPos2.x, pyramidPos2.y, WHITE);
 
                     //Check if mouse is over a rectangle
                     if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
