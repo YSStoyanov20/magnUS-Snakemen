@@ -4,9 +4,9 @@ int main()
 {   
 
     //Window initialization
-    SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
-    InitWindow(1600, 900, "Booleo");
-    MaximizeWindow();
+    SetConfigFlags(FLAG_VSYNC_HINT);
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "Booleo");
+    ToggleFullscreen();
 
     //Remove exit key
     SetExitKey(KEY_NULL);
