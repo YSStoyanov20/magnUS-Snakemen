@@ -1,7 +1,7 @@
-#include "PvP.h"
-namespace PvP{
+#include "PvC.h"
+namespace PvC{
     bool texturesLoaded = false;
-    bool isInPvP = false;
+    bool isInPvC = false;
 
     //Initialize the all textures
     Texture2D table;
@@ -333,31 +333,24 @@ namespace PvP{
         //Draw player 1's cards
         for(size_t i = 0; i<player1Cards.size();i++)
         {
-            if(playerTurn)
+            DrawTextureEx(player1Cards[i], player1CardsPos, 0, 1, WHITE);
+            //Check if mouse is over a card
+            if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}))
             {
-                DrawTextureEx(player1Cards[i], player1CardsPos, 0, 1, WHITE);
-                //Check if mouse is over a card
-                if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}))
+                SetMouseCursor(4);
+                DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
+                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
-                    SetMouseCursor(4);
-                    DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
-                    if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                    {
-                        selectedCard = i;
-                    }
-                }
-                //Check if card is selected
-                if(int(i) == selectedCard)
-                {
-                    //Outline selected card
-                    DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, ORANGE);
+                    selectedCard = i;
                 }
             }
-            else
+            //Check if card is selected
+            if(int(i) == selectedCard)
             {
-                //If it is not player's turn, draw the card face down
-                DrawTextureEx(cardBack, player1CardsPos, 0, 1, WHITE);
+                //Outline selected card
+                DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, ORANGE);
             }
+
             player1CardsPos.x+=cardWidth+5;
         }
 
@@ -367,31 +360,9 @@ namespace PvP{
         //Draw player 2's cards
         for(size_t i = 0; i<player2Cards.size();i++)
         {
-            if(!playerTurn)
-            {
-                DrawTextureEx(player2Cards[i], player2CardsPos, 0, 1, WHITE);
-                //Check if mouse is over a card
-                if(CheckCollisionPointRec(MousePos, {player2CardsPos.x, player2CardsPos.y, cardWidth, cardHeight}))
-                {
-                    SetMouseCursor(4);
-                    DrawRectangleLinesEx({player2CardsPos.x, player2CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
-                    if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                    {
-                        selectedCard = i;
-                    }
-                }
-                //Check if card is selected
-                if(int(i) == selectedCard)
-                {
-                    //Outline selected card
-                    DrawRectangleLinesEx({player2CardsPos.x, player2CardsPos.y, cardWidth, cardHeight}, 2.6, ORANGE);
-                }
-            }
-            else
-            {
-                //If it is not player's turn, draw the card face down
-                DrawTextureEx(cardBack, player2CardsPos, 0, 1, WHITE);
-            }
+            //If it is not player's turn, draw the card face down
+            DrawTextureEx(cardBack, player2CardsPos, 0, 1, WHITE);
+            DrawTextureEx(player2Cards[i], player2CardsPos, 0, 1, WHITE);
             player2CardsPos.x+=cardWidth+5;
         }
     }
@@ -451,30 +422,6 @@ namespace PvP{
             pyramidPos2.x = GetScreenWidth()/2 - cardWidth*2 - spaceBetween;
             for(int j = 0;j < row; j++)
             {
-                if(((row == 5 && player2Pyramid[i][j].id == 0) || (player2Pyramid[i-1][j].id != 0 && player2Pyramid[i-1][j+1].id != 0)) && !playerTurn)
-                {
-                    DrawTexture(placeHolder, pyramidPos2.x, pyramidPos2.y, WHITE);
-
-                    //Check if mouse is over a rectangle
-                    if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
-                    {
-                        SetMouseCursor(4);
-                        //Outline selected card
-                        DrawRectangleLinesEx({pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}, 2.6, RED);
-                        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                        {
-                            //Set selected card
-                            selectedPyramidPos[0] = i;
-                            selectedPyramidPos[1] = j;
-                        }
-                    }
-                }
-                //Check if card is selected
-                if(selectedPyramidPos[0] == i && selectedPyramidPos[1] == j && !playerTurn)
-                {
-                    //Outline selected card
-                    DrawRectangleLinesEx({pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}, 2.6, ORANGE);
-                }
                 if(player2Pyramid[i][j].id!=0)
                 {
                     //Draw the card if placed
@@ -488,6 +435,7 @@ namespace PvP{
         }
 
     }
+
     void placeCard()
     {
         //Check if player has selected a card and a pyramid position
@@ -711,6 +659,39 @@ namespace PvP{
         //Reset the selected card
         selectedCard = -1;
     }
+    void computerTurn()
+    {
+        Vector2 pyramidPos2 = {0, GetScreenHeight()/2 + cardHeight/2 + 5};
+        for(size_t i = 0; i<player2Cards.size();i++)
+        {
+            selectedCard = i;
+            for(int j = 0, spaceBetween = 40, row = 5;j<5;j++)
+            {
+                pyramidPos2.x = GetScreenWidth()/2 - cardWidth*2 - spaceBetween;
+                for(int k = 0; k < row; k++)
+                {
+                    if(((row == 5 && player2Pyramid[j][k].id == 0) || (player2Pyramid[j-1][k].id != 0 && player2Pyramid[j-1][k+1].id != 0)) && !playerTurn)
+                    {
+                        if(player2Pyramid[j][k].id == 0)
+                        {
+                            selectedPyramidPos[0] = j;
+                            selectedPyramidPos[1] = k;
+                            placeCard();
+                        }
+                    }
+                    pyramidPos2.x+=cardWidth+2;
+                }
+                spaceBetween-=45;
+                pyramidPos2.y+=cardHeight-60;
+                row--;
+            }
+        }
+        if(!playerTurn)
+        {
+            selectedCard = GetRandomValue(0,player2Cards.size()-1);
+            discardCard();
+        }
+    }
     void drawButtons(Vector2 MousePos)
     {
         Vector2 placeCardButtonPos = {float(buttonWidth*1.2), GetScreenHeight()/2 + buttonHeight*4};
@@ -721,7 +702,7 @@ namespace PvP{
             SetMouseCursor(4);
             DrawRectangle(placeCardButtonPos.x, placeCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});
             DrawTexture(placeCardButtonPressed, placeCardButtonPos.x, placeCardButtonPos.y + 4, WHITE);
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && playerTurn)
             {
                 placeCard();
             }     
@@ -735,10 +716,10 @@ namespace PvP{
             SetMouseCursor(4);
             DrawRectangle(discardCardButtonPos.x, discardCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});
             DrawTexture(discardCardButtonPressed, discardCardButtonPos.x, placeCardButtonPos.y + 4, WHITE);
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && playerTurn)
             {
                 discardCard();
-            }     
+            }    
         }
     }
     void displayPlayerTurn()
@@ -781,7 +762,7 @@ namespace PvP{
     void startGame()
     {
 
-        if(isInPvP)
+        if(isInPvC)
         {
             SetMouseCursor(0);
             //Get mouse position            
@@ -803,6 +784,10 @@ namespace PvP{
             drawButtons(MousePos);
             addCardOnEachTurn();
             hasPlayerWon();
+            if(!playerTurn)
+            {
+                computerTurn();
+            }
 
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
@@ -810,7 +795,7 @@ namespace PvP{
             //If escape key pressed return back to Main Menu
             if(IsKeyPressed(KEY_ESCAPE))
             {
-                isInPvP = false;
+                isInPvC = false;
                 mainMenu::isInMainMenu = true;
             }
         }

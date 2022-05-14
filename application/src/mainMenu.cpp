@@ -44,6 +44,7 @@ namespace mainMenu{
             if(!texturesLoaded)
             {
                 PvP::unloadTextures();
+                PvC::unloadTextures();
                 loadTextures();
             }
 
@@ -84,6 +85,7 @@ namespace mainMenu{
                 {
                     unloadTextures();
                     isInMainMenu = false;
+                    PvC::isInPvC = true;
                 }     
             }
 
@@ -105,6 +107,10 @@ namespace mainMenu{
         if(PvP::isInPvP)
         {
             PvP::startGame();
+        }
+        if(PvC::isInPvC)
+        {
+            PvC::startGame();
         }
     }
 };
