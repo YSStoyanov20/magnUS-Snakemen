@@ -304,6 +304,21 @@ namespace PvP{
                     player2Cards.push_back(orCards0.back());
                     orCards0.pop_back();
                 }
+                if(randomNum == 3 && orCards1.size()>0)
+                {
+                    player2Cards.push_back(orCards1.back());
+                    orCards1.pop_back();
+                }
+                if(randomNum == 4 && xorCards0.size()>0)
+                {
+                    player2Cards.push_back(xorCards0.back());
+                    xorCards0.pop_back();
+                }
+                if(randomNum == 5 && xorCards1.size()>0)
+                {
+                    player2Cards.push_back(xorCards1.back());
+                    xorCards1.pop_back();
+                }
             }
         }
     }
