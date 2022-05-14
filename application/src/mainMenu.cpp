@@ -40,6 +40,7 @@ namespace mainMenu{
     {
         if(isInMainMenu)
         {
+            SetMouseCursor(0);
             if(!texturesLoaded)
             {
                 PvP::unloadTextures();
@@ -47,7 +48,7 @@ namespace mainMenu{
             }
 
             //Set button position
-            Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, GetScreenHeight()/2 - buttonHeight};
+            Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, GetScreenHeight()/2 - buttonHeight*2 + 4};
 
             //Get mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
@@ -60,6 +61,7 @@ namespace mainMenu{
             //Detect if the mouse is over the menu button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 4, buttonWidth, buttonHeight}))
             {
+                SetMouseCursor(4);
                 DrawRectangle(buttonPos.x, buttonPos.y, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(MenuButtonPressed, buttonPos.x, buttonPos.y + 4, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -75,6 +77,7 @@ namespace mainMenu{
             //Detect if the mouse is over the rules button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 104, buttonWidth, buttonHeight}))
             {
+                SetMouseCursor(4);
                 DrawRectangle(buttonPos.x, buttonPos.y + 100, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(RuleButtonPressed, buttonPos.x, buttonPos.y + 104, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -89,6 +92,7 @@ namespace mainMenu{
             //Detect if the mouse is over the quit button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 204, buttonWidth, buttonHeight}))
             {
+                SetMouseCursor(4);
                 DrawRectangle(buttonPos.x, buttonPos.y + 200, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(QuitButtonPressed, buttonPos.x, buttonPos.y + 204, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
