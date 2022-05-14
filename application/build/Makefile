@@ -1,5 +1,5 @@
 SRCDIR=../src
-_SRC=mainMenu.cpp PvP.cpp PvC.cpp
+_SRC=mainMenu.cpp PvP.cpp PvC.cpp global.cpp
 SRC=$(patsubst %, $(SRCDIR)/%, $(_SRC))
 
 OUTPUT=Booleo.exe

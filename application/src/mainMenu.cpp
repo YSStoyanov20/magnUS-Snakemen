@@ -43,8 +43,7 @@ namespace mainMenu{
             SetMouseCursor(0);
             if(!texturesLoaded)
             {
-                PvP::unloadTextures();
-                PvC::unloadTextures();
+                global::unloadTextures();
                 loadTextures();
             }
 

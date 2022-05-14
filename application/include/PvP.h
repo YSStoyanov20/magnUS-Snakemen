@@ -1,11 +1,7 @@
 #pragma once
 #include "mainMenu.h"
-#include <iostream>
-#include <time.h>
-#include <vector>
+#include "global.h"
 namespace PvP{
-    void loadTextures();
-    void unloadTextures();
     void startGame();
     extern bool isInPvP;
 };

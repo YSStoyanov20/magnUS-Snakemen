@@ -1,11 +1,7 @@
 #pragma once
 #include "mainMenu.h"
-#include <iostream>
-#include <time.h>
-#include <vector>
+#include "global.h"
 namespace PvC{
-    void loadTextures();
-    void unloadTextures();
     void startGame();
     extern bool isInPvC;
 };
