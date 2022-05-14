@@ -629,6 +629,73 @@ namespace PvP{
         selectedPyramidPos[1] = -1;
         
     }
+    void discardCard()
+    {
+        //Check if player has selected a card
+        if(selectedCard != -1)
+        {
+            //Check if it is player 1's turn
+            if(playerTurn)
+            {
+                switch(player1Cards[selectedCard].id)
+                {
+                    case 7:
+                        andCards0.push_back(player1Cards[selectedCard]);
+                        break;
+                    case 8:
+                        andCards1.push_back(player1Cards[selectedCard]);
+                        break;
+                    case 9:
+                        orCards0.push_back(player1Cards[selectedCard]);
+                        break;
+                    case 10:
+                        orCards1.push_back(player1Cards[selectedCard]);
+                        break;
+                    case 11:
+                        xorCards0.push_back(player1Cards[selectedCard]);
+                        break;
+                    case 12:
+                        xorCards1.push_back(player1Cards[selectedCard]);
+                        break;
+                    default:
+                        break;
+                }
+                player1Cards.erase(player1Cards.begin()+selectedCard);
+            }
+            //Check if it is player 2's turn
+            if(!playerTurn)
+            {
+                switch(player2Cards[selectedCard].id)
+                {
+                    case 7:
+                        andCards0.push_back(player2Cards[selectedCard]);
+                        break;
+                    case 8:
+                        andCards1.push_back(player2Cards[selectedCard]);
+                        break;
+                    case 9:
+                        orCards0.push_back(player2Cards[selectedCard]);
+                        break;
+                    case 10:
+                        orCards1.push_back(player2Cards[selectedCard]);
+                        break;
+                    case 11:
+                        xorCards0.push_back(player2Cards[selectedCard]);
+                        break;
+                    case 12:
+                        xorCards1.push_back(player2Cards[selectedCard]);
+                        break;
+                    default:
+                        break;
+                }
+                player2Cards.erase(player2Cards.begin()+selectedCard);
+            }
+            //Change player turn
+            playerTurn = !playerTurn;
+        }
+        //Reset the selected card
+        selectedCard = -1;
+    }
     void displayPlayerTurn()
     {
         if(playerTurn)
@@ -673,6 +740,17 @@ namespace PvP{
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     placeCard();
+                }
+            }
+
+            DrawRectangle(1100,650,100,50,BLACK);
+            if(CheckCollisionPointRec(MousePos, {1100,650,100,50}))
+            {
+                SetMouseCursor(4);
+                DrawRectangle(1100,650,100,50,BLUE);
+                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    discardCard();
                 }
             }
             if(playerTurn && player1Cards.size()<5)
