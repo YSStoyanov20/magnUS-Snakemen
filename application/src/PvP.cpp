@@ -18,6 +18,7 @@ namespace PvP{
     Texture2D placeCardButtonPressed;
     Texture2D discardCardButton;
     Texture2D discardCardButtonPressed;
+    Texture2D placeHolder;
 
     //Initialize deck vectors
     std::vector<Texture2D> andCards0;
@@ -66,6 +67,7 @@ namespace PvP{
         orCard1 = LoadTexture("./Sprites/Or-One-Card.png"); // ID = 10
         xorCard0 = LoadTexture("./Sprites/XOR-Zero-Card.png"); // ID = 11
         xorCard1 = LoadTexture("./Sprites/XOR-One-Card.png"); // ID = 12
+        placeHolder = LoadTexture("./Sprites/placeHolder-Card.png");
         placeCardButton = LoadTexture("./Sprites/Place-Button-Unpressed.png");
         placeCardButtonPressed = LoadTexture("./Sprites/Place-Button-Pressed.png");
         discardCardButton = LoadTexture("./Sprites/Discard-Button-Unpressed.png");
@@ -183,32 +185,32 @@ namespace PvP{
             while(player1Cards.size()<4)
             {
                 int randomNum = GetRandomValue(0,5);
-                if(randomNum == 0 && andCards0.size()>0)
+                if(randomNum == 0 && andCards0.size()>=0)
                 {
                     player1Cards.push_back(andCards0.back());
                     andCards0.pop_back();
                 }
-                if(randomNum == 1 && andCards1.size()>0)
+                if(randomNum == 1 && andCards1.size()>=0)
                 {
                     player1Cards.push_back(andCards1.back());
                     andCards1.pop_back();
                 }
-                if(randomNum == 2 && orCards0.size()>0)
+                if(randomNum == 2 && orCards0.size()>=0)
                 {
                     player1Cards.push_back(orCards0.back());
                     orCards0.pop_back();
                 }
-                if(randomNum == 3 && orCards1.size()>0)
+                if(randomNum == 3 && orCards1.size()>=0)
                 {
                     player1Cards.push_back(orCards1.back());
                     orCards1.pop_back();
                 }
-                if(randomNum == 4 && xorCards0.size()>0)
+                if(randomNum == 4 && xorCards0.size()>=0)
                 {
                     player1Cards.push_back(xorCards0.back());
                     xorCards0.pop_back();
                 }
-                if(randomNum == 5 && xorCards1.size()>0)
+                if(randomNum == 5 && xorCards1.size()>=0)
                 {
                     player1Cards.push_back(xorCards1.back());
                     xorCards1.pop_back();
@@ -219,32 +221,32 @@ namespace PvP{
             while(player2Cards.size()<4)
             {
                 int randomNum = GetRandomValue(0,5);
-                if(randomNum == 0 && andCards0.size()>0)
+                if(randomNum == 0 && andCards0.size()>=0)
                 {
                     player2Cards.push_back(andCards0.back());
                     andCards0.pop_back();
                 }
-                if(randomNum == 1 && andCards1.size()>0)
+                if(randomNum == 1 && andCards1.size()>=0)
                 {
                     player2Cards.push_back(andCards1.back());
                     andCards1.pop_back();
                 }
-                if(randomNum == 2 && orCards0.size()>0)
+                if(randomNum == 2 && orCards0.size()>=0)
                 {
                     player2Cards.push_back(orCards0.back());
                     orCards0.pop_back();
                 }
-                if(randomNum == 3 && orCards1.size()>0)
+                if(randomNum == 3 && orCards1.size()>=0)
                 {
                     player2Cards.push_back(orCards1.back());
                     orCards1.pop_back();
                 }
-                if(randomNum == 4 && xorCards0.size()>0)
+                if(randomNum == 4 && xorCards0.size()>=0)
                 {
                     player2Cards.push_back(xorCards0.back());
                     xorCards0.pop_back();
                 }
-                if(randomNum == 5 && xorCards1.size()>0)
+                if(randomNum == 5 && xorCards1.size()>=0)
                 {
                     player2Cards.push_back(xorCards1.back());
                     xorCards1.pop_back();
@@ -256,32 +258,32 @@ namespace PvP{
             int randomNum = GetRandomValue(0,5);
             if(playerTurn)
             {
-                if(randomNum == 0 && andCards0.size()>0)
+                if(randomNum == 0 && andCards0.size()>=0)
                 {
                     player1Cards.push_back(andCards0.back());
                     andCards0.pop_back();
                 }
-                if(randomNum == 1 && andCards1.size()>0)
+                if(randomNum == 1 && andCards1.size()>=0)
                 {
                     player1Cards.push_back(andCards1.back());
                     andCards1.pop_back();
                 }
-                if(randomNum == 2 && orCards0.size()>0)
+                if(randomNum == 2 && orCards0.size()>=0)
                 {
                     player1Cards.push_back(orCards0.back());
                     orCards0.pop_back();
                 }
-                if(randomNum == 3 && orCards1.size()>0)
+                if(randomNum == 3 && orCards1.size()>=0)
                 {
                     player1Cards.push_back(orCards1.back());
                     orCards1.pop_back();
                 }
-                if(randomNum == 4 && xorCards0.size()>0)
+                if(randomNum == 4 && xorCards0.size()>=0)
                 {
                     player1Cards.push_back(xorCards0.back());
                     xorCards0.pop_back();
                 }
-                if(randomNum == 5 && xorCards1.size()>0)
+                if(randomNum == 5 && xorCards1.size()>=0)
                 {
                     player1Cards.push_back(xorCards1.back());
                     xorCards1.pop_back();
@@ -289,32 +291,32 @@ namespace PvP{
             }
             else
             {
-                if(randomNum == 0 && andCards0.size()>0)
+                if(randomNum == 0 && andCards0.size()>=0)
                 {
                     player2Cards.push_back(andCards0.back());
                     andCards0.pop_back();
                 }
-                if(randomNum == 1 && andCards1.size()>0)
+                if(randomNum == 1 && andCards1.size()>=0)
                 {
                     player2Cards.push_back(andCards1.back());
                     andCards1.pop_back();
                 }
-                if(randomNum == 2 && orCards0.size()>0)
+                if(randomNum == 2 && orCards0.size()>=0)
                 {
                     player2Cards.push_back(orCards0.back());
                     orCards0.pop_back();
                 }
-                if(randomNum == 3 && orCards1.size()>0)
+                if(randomNum == 3 && orCards1.size()>=0)
                 {
                     player2Cards.push_back(orCards1.back());
                     orCards1.pop_back();
                 }
-                if(randomNum == 4 && xorCards0.size()>0)
+                if(randomNum == 4 && xorCards0.size()>=0)
                 {
                     player2Cards.push_back(xorCards0.back());
                     xorCards0.pop_back();
                 }
-                if(randomNum == 5 && xorCards1.size()>0)
+                if(randomNum == 5 && xorCards1.size()>=0)
                 {
                     player2Cards.push_back(xorCards1.back());
                     xorCards1.pop_back();
@@ -342,7 +344,6 @@ namespace PvP{
                     if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                     {
                         selectedCard = i;
-                        std::cout<<player1Cards[i].id<<std::endl;
                     }
                 }
                 //Check if card is selected
@@ -377,7 +378,6 @@ namespace PvP{
                     if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                     {
                         selectedCard = i;
-                        std::cout<<player2Cards[i].id<<std::endl;
                     }
                 }
                 //Check if card is selected
@@ -408,10 +408,7 @@ namespace PvP{
             {
                 if(((row == 5 && player1Pyramid[i][j].id == 0) || (player1Pyramid[i-1][j].id != 0 && player1Pyramid[i-1][j+1].id != 0)) && playerTurn)
                 {
-                //If card can be placed, draw a rectangle
-                DrawRectangle(pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight, BLACK);
-
-                DrawText(TextFormat("%d,%d",i,j), pyramidPos1.x, pyramidPos1.y, 20, WHITE);
+                DrawTexture(placeHolder, pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, WHITE);
 
                 //Check if mouse is over a rectangle
                 if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
@@ -456,10 +453,7 @@ namespace PvP{
             {
                 if(((row == 5 && player2Pyramid[i][j].id == 0) || (player2Pyramid[i-1][j].id != 0 && player2Pyramid[i-1][j+1].id != 0)) && !playerTurn)
                 {
-                    //If card can be placed, draw a rectangle
-                    DrawRectangle(pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight, BLACK);
-
-                    DrawText(TextFormat("%d,%d",i,j), pyramidPos2.x, pyramidPos2.y, 20, WHITE);
+                    DrawTexture(placeHolder, pyramidPos2.x, pyramidPos2.y, WHITE);
 
                     //Check if mouse is over a rectangle
                     if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
@@ -514,7 +508,6 @@ namespace PvP{
                 {
                     card1Value = bool(!initialBinaries[selectedPyramidPos[1]]);
                     card2Value = bool(!initialBinaries[selectedPyramidPos[1]+1]);
-                    std::cout << card1Value << " " << card2Value << std::endl;
                 }
                 if(selectedPyramidPos[0] != 0)
                 {
@@ -536,7 +529,6 @@ namespace PvP{
                     {
                         card2Value = 0;
                     }
-                    std::cout<<card1Value<<" "<<card2Value<<std::endl;
                 }
                 if((id == 7) && !(card1Value && card2Value))
                 {
@@ -580,7 +572,6 @@ namespace PvP{
                 {
                     card1Value = bool(initialBinaries[selectedPyramidPos[1]]);
                     card2Value = bool(initialBinaries[selectedPyramidPos[1]+1]);
-                    std::cout << card1Value << " " << card2Value << std::endl;
                 }
 
                 if(selectedPyramidPos[0] != 0)
@@ -603,7 +594,6 @@ namespace PvP{
                     {
                         card2Value = 0;
                     }
-                    std::cout<<card1Value<<" "<<card2Value<<std::endl;
                 }
 
                 if((id == 7) && !(card1Value && card2Value))
@@ -773,7 +763,22 @@ namespace PvP{
             addPlayerCards(false);
         }
     }
-    void setCards()
+    void hasPlayerWon()
+    {
+        if(player1Pyramid[4][0].id!=0)
+        {
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), { 0, 0, 0, 220 });
+            DrawText("Player 1 wins!", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
+            DrawText("Press ESC to exit", GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 180, 40, WHITE);
+        }
+        if(player2Pyramid[4][0].id!=0)
+        {
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), { 0, 0, 0, 220 });
+            DrawText("Player 2 wins", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
+            DrawText("Press ESC to exit", GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 180, 40, WHITE);
+        }
+    }
+    void startGame()
     {
 
         if(isInPvP)
@@ -797,6 +802,7 @@ namespace PvP{
             displayPlayerTurn();
             drawButtons(MousePos);
             addCardOnEachTurn();
+            hasPlayerWon();
 
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);

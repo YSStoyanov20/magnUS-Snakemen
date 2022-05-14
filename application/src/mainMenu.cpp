@@ -104,7 +104,7 @@ namespace mainMenu{
         }
         if(PvP::isInPvP)
         {
-            PvP::setCards();
+            PvP::startGame();
         }
     }
 };

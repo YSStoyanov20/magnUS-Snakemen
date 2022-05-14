@@ -6,6 +6,6 @@
 namespace PvP{
     void loadTextures();
     void unloadTextures();
-    void setCards();
+    void startGame();
     extern bool isInPvP;
 };
