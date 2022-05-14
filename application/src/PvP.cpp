@@ -152,93 +152,144 @@ namespace PvP{
             initialBinaryPos.x+=cardWidth+5;
         }
     }
-    void DrawTable()
+    void drawTable()
     {
         //Draw the table
         DrawTexture(table, 0, 0, WHITE);
         DrawRectangleLinesEx({GetScreenWidth()/2 - cardWidth*3 - 5, GetScreenHeight()/2 - cardHeight/2 - 5, cardWidth*6 + 35, cardHeight + 10}, 2.6, WHITE);
     }
 
-    void DrawDeck()
-    {
-        //Draw the deck
-        DrawTexture(deck, 144, 750, WHITE);
-    }
-
-    void randomizePlayerCards()
+    void addPlayerCards(bool initialCardRandomization)
     {
         //Set the random seed
         SetRandomSeed(time(NULL));
-
-        //Randomize player 1's hand
-        for(int i = 0;i<4;i++)
+        if(initialCardRandomization)
         {
-            int randomNum = GetRandomValue(0,5);
-            if(randomNum == 0 && andCards0.size()>0)
+            //Randomize player 1's hand
+            while(player1Cards.size()<4)
             {
-                player1Cards.push_back(andCards0.back());
-                andCards0.pop_back();
+                int randomNum = GetRandomValue(0,5);
+                if(randomNum == 0 && andCards0.size()>0)
+                {
+                    player1Cards.push_back(andCards0.back());
+                    andCards0.pop_back();
+                }
+                if(randomNum == 1 && andCards1.size()>0)
+                {
+                    player1Cards.push_back(andCards1.back());
+                    andCards1.pop_back();
+                }
+                if(randomNum == 2 && orCards0.size()>0)
+                {
+                    player1Cards.push_back(orCards0.back());
+                    orCards0.pop_back();
+                }
+                if(randomNum == 3 && orCards1.size()>0)
+                {
+                    player1Cards.push_back(orCards1.back());
+                    orCards1.pop_back();
+                }
+                if(randomNum == 4 && xorCards0.size()>0)
+                {
+                    player1Cards.push_back(xorCards0.back());
+                    xorCards0.pop_back();
+                }
+                if(randomNum == 5 && xorCards1.size()>0)
+                {
+                    player1Cards.push_back(xorCards1.back());
+                    xorCards1.pop_back();
+                }
             }
-            if(randomNum == 1 && andCards1.size()>0)
+
+            //Randomize player 2's hand
+            while(player2Cards.size()<4)
             {
-                player1Cards.push_back(andCards1.back());
-                andCards1.pop_back();
-            }
-            if(randomNum == 2 && orCards0.size()>0)
-            {
-                player1Cards.push_back(orCards0.back());
-                orCards0.pop_back();
-            }
-            if(randomNum == 3 && orCards1.size()>0)
-            {
-                player1Cards.push_back(orCards1.back());
-                orCards1.pop_back();
-            }
-            if(randomNum == 4 && xorCards0.size()>0)
-            {
-                player1Cards.push_back(xorCards0.back());
-                xorCards0.pop_back();
-            }
-            if(randomNum == 5 && xorCards1.size()>0)
-            {
-                player1Cards.push_back(xorCards1.back());
-                xorCards1.pop_back();
+                int randomNum = GetRandomValue(0,5);
+                if(randomNum == 0 && andCards0.size()>0)
+                {
+                    player2Cards.push_back(andCards0.back());
+                    andCards0.pop_back();
+                }
+                if(randomNum == 1 && andCards1.size()>0)
+                {
+                    player2Cards.push_back(andCards1.back());
+                    andCards1.pop_back();
+                }
+                if(randomNum == 2 && orCards0.size()>0)
+                {
+                    player2Cards.push_back(orCards0.back());
+                    orCards0.pop_back();
+                }
+                if(randomNum == 3 && orCards1.size()>0)
+                {
+                    player2Cards.push_back(orCards1.back());
+                    orCards1.pop_back();
+                }
+                if(randomNum == 4 && xorCards0.size()>0)
+                {
+                    player2Cards.push_back(xorCards0.back());
+                    xorCards0.pop_back();
+                }
+                if(randomNum == 5 && xorCards1.size()>0)
+                {
+                    player2Cards.push_back(xorCards1.back());
+                    xorCards1.pop_back();
+                }
             }
         }
-
-        //Randomize player 2's hand
-        for(int i = 0;i<4;i++)
+        else
         {
             int randomNum = GetRandomValue(0,5);
-            if(randomNum == 0 && andCards0.size()>0)
+            if(playerTurn)
             {
-                player2Cards.push_back(andCards0.back());
-                andCards0.pop_back();
+                if(randomNum == 0 && andCards0.size()>0)
+                {
+                    player1Cards.push_back(andCards0.back());
+                    andCards0.pop_back();
+                }
+                if(randomNum == 1 && andCards1.size()>0)
+                {
+                    player1Cards.push_back(andCards1.back());
+                    andCards1.pop_back();
+                }
+                if(randomNum == 2 && orCards0.size()>0)
+                {
+                    player1Cards.push_back(orCards0.back());
+                    orCards0.pop_back();
+                }
+                if(randomNum == 3 && orCards1.size()>0)
+                {
+                    player1Cards.push_back(orCards1.back());
+                    orCards1.pop_back();
+                }
+                if(randomNum == 4 && xorCards0.size()>0)
+                {
+                    player1Cards.push_back(xorCards0.back());
+                    xorCards0.pop_back();
+                }
+                if(randomNum == 5 && xorCards1.size()>0)
+                {
+                    player1Cards.push_back(xorCards1.back());
+                    xorCards1.pop_back();
+                }
             }
-            if(randomNum == 1 && andCards1.size()>0)
+            else
             {
-                player2Cards.push_back(andCards1.back());
-                andCards1.pop_back();
-            }
-            if(randomNum == 2 && orCards0.size()>0)
-            {
-                player2Cards.push_back(orCards0.back());
-                orCards0.pop_back();
-            }
-            if(randomNum == 3 && orCards1.size()>0)
-            {
-                player2Cards.push_back(orCards1.back());
-                orCards1.pop_back();
-            }
-            if(randomNum == 4 && xorCards0.size()>0)
-            {
-                player2Cards.push_back(xorCards0.back());
-                xorCards0.pop_back();
-            }
-            if(randomNum == 5 && xorCards1.size()>0)
-            {
-                player2Cards.push_back(xorCards1.back());
-                xorCards1.pop_back();
+                if(randomNum == 0 && andCards0.size()>0)
+                {
+                    player2Cards.push_back(andCards0.back());
+                    andCards0.pop_back();
+                }
+                if(randomNum == 1 && andCards1.size()>0)
+                {
+                    player2Cards.push_back(andCards1.back());
+                    andCards1.pop_back();
+                }
+                if(randomNum == 2 && orCards0.size()>0)
+                {
+                    player2Cards.push_back(orCards0.back());
+                    orCards0.pop_back();
+                }
             }
         }
     }
@@ -246,7 +297,7 @@ namespace PvP{
     void drawPlayerCards(Vector2 MousePos)
     {
         //Set player 1 cards position
-        Vector2 player1CardsPos = {100, 100};
+        Vector2 player1CardsPos = {130, GetScreenHeight()/2 - cardHeight/2};
 
         //Draw player 1's cards
         for(size_t i = 0; i<player1Cards.size();i++)
@@ -257,6 +308,7 @@ namespace PvP{
                 //Check if mouse is over a card
                 if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}))
                 {
+                    SetMouseCursor(4);
                     DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
                     if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                     {
@@ -280,7 +332,7 @@ namespace PvP{
         }
 
         //Set player 2 cards position
-        Vector2 player2CardsPos = {1000, 100};
+        Vector2 player2CardsPos = {GetScreenWidth()/2 + cardWidth*4 + 20, GetScreenHeight()/2 - cardHeight/2};
 
         //Draw player 2's cards
         for(size_t i = 0; i<player2Cards.size();i++)
@@ -291,6 +343,7 @@ namespace PvP{
                 //Check if mouse is over a card
                 if(CheckCollisionPointRec(MousePos, {player2CardsPos.x, player2CardsPos.y, cardWidth, cardHeight}))
                 {
+                    SetMouseCursor(4);
                     DrawRectangleLinesEx({player2CardsPos.x, player2CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
                     if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                     {
@@ -334,6 +387,7 @@ namespace PvP{
                 //Check if mouse is over a rectangle
                 if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
                 {
+                    SetMouseCursor(4);
                     //Outline selected card
                     DrawRectangleLinesEx({pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}, 2.6, RED);
                     if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -381,6 +435,7 @@ namespace PvP{
                     //Check if mouse is over a rectangle
                     if(CheckCollisionPointRec(MousePos, {pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}) && player2Pyramid[i][j].id == 0)
                     {
+                        SetMouseCursor(4);
                         //Outline selected card
                         DrawRectangleLinesEx({pyramidPos2.x, pyramidPos2.y, cardWidth, cardHeight}, 2.6, RED);
                         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -574,10 +629,23 @@ namespace PvP{
         selectedPyramidPos[1] = -1;
         
     }
+    void displayPlayerTurn()
+    {
+        if(playerTurn)
+        {
+            DrawText("Player 1's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+        }
+        else
+        {
+            DrawText("Player 2's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+        }
+    }
     void setCards()
     {
+
         if(isInPvP)
         {
+            SetMouseCursor(0);
             //Get mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
 
@@ -586,27 +654,34 @@ namespace PvP{
             {
                 loadTextures();
                 randomizeInitialBinary();
-                randomizePlayerCards();
+                addPlayerCards(true);
             }
 
-            DrawTable();
-            DrawDeck();
+            drawTable();
             drawInitialBinary();
             drawPlayerCards(MousePos);
             drawPyramids(MousePos);
-
+            displayPlayerTurn();
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
-
 
             DrawRectangle(1100,250,100,50,BLACK);
             if(CheckCollisionPointRec(MousePos, {1100,250,100,50}))
             {
+                SetMouseCursor(4);
                 DrawRectangle(1100,250,100,50,BLUE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
-                        placeCard();
+                    placeCard();
                 }
+            }
+            if(playerTurn && player1Cards.size()<5)
+            {
+                addPlayerCards(false);
+            }
+            if(!playerTurn && player2Cards.size()<5)
+            {
+                addPlayerCards(false);
             }
 
             //If escape key pressed return back to Main Menu
