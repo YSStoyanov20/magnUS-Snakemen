@@ -5,7 +5,7 @@ namespace PvP{
 
     //Initialize the all textures
     Texture2D table;
-    Texture2D deck;
+    Texture2D cardBack;
     Texture2D initialBinary;
     Texture2D initialBinaryFlipped;
     Texture2D andCard0;
@@ -14,6 +14,10 @@ namespace PvP{
     Texture2D orCard1;
     Texture2D xorCard0;
     Texture2D xorCard1;
+    Texture2D placeCardButton;
+    Texture2D placeCardButtonPressed;
+    Texture2D discardCardButton;
+    Texture2D discardCardButtonPressed;
 
     //Initialize deck vectors
     std::vector<Texture2D> andCards0;
@@ -30,6 +34,8 @@ namespace PvP{
     //Initialize card width and height
     float cardWidth;
     float cardHeight;
+    float buttonWidth;
+    float buttonHeight;
 
     //Initialize initial binary array
     int initialBinaries[6];
@@ -50,7 +56,7 @@ namespace PvP{
     void loadTextures()
     {
         //Load all textures
-        deck = LoadTexture("./Sprites/Deck.png");
+        cardBack = LoadTexture("./Sprites/Deck.png");
         table = LoadTexture("./Sprites/Table.png");
         initialBinary = LoadTexture("./Sprites/Initial-Binaries-Reverse.png");
         initialBinaryFlipped = LoadTexture("./Sprites/Initial-Binaries.png");
@@ -60,10 +66,18 @@ namespace PvP{
         orCard1 = LoadTexture("./Sprites/Or-One-Card.png"); // ID = 10
         xorCard0 = LoadTexture("./Sprites/XOR-Zero-Card.png"); // ID = 11
         xorCard1 = LoadTexture("./Sprites/XOR-One-Card.png"); // ID = 12
+        placeCardButton = LoadTexture("./Sprites/Place-Button-Unpressed.png");
+        placeCardButtonPressed = LoadTexture("./Sprites/Place-Button-Pressed.png");
+        discardCardButton = LoadTexture("./Sprites/Discard-Button-Unpressed.png");
+        discardCardButtonPressed = LoadTexture("./Sprites/Discard-Button-Pressed.png");
 
         //Set the card width and height
         cardWidth = initialBinary.width;
         cardHeight = initialBinary.height;
+
+        //Set the button width and height
+        buttonWidth = discardCardButton.width;
+        buttonHeight = discardCardButton.height;
 
         //Define deck
         andCards0 = {andCard0, andCard0, andCard0, andCard0, andCard0, andCard0, andCard0, andCard0};
@@ -111,7 +125,7 @@ namespace PvP{
         UnloadTexture(xorCard0);
         UnloadTexture(xorCard1);
         UnloadTexture(table);
-        UnloadTexture(deck);
+        UnloadTexture(cardBack);
 
         texturesLoaded = false;
     }
@@ -326,7 +340,7 @@ namespace PvP{
             else
             {
                 //If it is not player's turn, draw the card face down
-                DrawTextureEx(deck, player1CardsPos, 0, 1, WHITE);
+                DrawTextureEx(cardBack, player1CardsPos, 0, 1, WHITE);
             }
             player1CardsPos.x+=cardWidth+5;
         }
@@ -361,7 +375,7 @@ namespace PvP{
             else
             {
                 //If it is not player's turn, draw the card face down
-                DrawTextureEx(deck, player2CardsPos, 0, 1, WHITE);
+                DrawTextureEx(cardBack, player2CardsPos, 0, 1, WHITE);
             }
             player2CardsPos.x+=cardWidth+5;
         }
@@ -617,10 +631,6 @@ namespace PvP{
                 playerTurn = !playerTurn;
             }
         }
-        for(int i = 0;i<300;i++)
-        {
-            DrawText("Card or position not selected", GetScreenWidth()/2, GetScreenHeight()/2, 20, RED);
-        }
 
         //Reset the selected card
         selectedCard = -1;
@@ -696,6 +706,36 @@ namespace PvP{
         //Reset the selected card
         selectedCard = -1;
     }
+    void drawButtons(Vector2 MousePos)
+    {
+        Vector2 placeCardButtonPos = {float(buttonWidth*1.2), GetScreenHeight()/2 + buttonHeight*4};
+        DrawTextureEx(placeCardButton, placeCardButtonPos, 0, 1, WHITE);
+        //Detect if the mouse is over the menu button
+        if(CheckCollisionPointRec(MousePos, {placeCardButtonPos.x, placeCardButtonPos.y + 4, buttonWidth, buttonHeight}))
+        {
+            SetMouseCursor(4);
+            DrawRectangle(placeCardButtonPos.x, placeCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});
+            DrawTexture(placeCardButtonPressed, placeCardButtonPos.x, placeCardButtonPos.y + 4, WHITE);
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                placeCard();
+            }     
+        }
+        
+        Vector2 discardCardButtonPos = {GetScreenWidth()-float(buttonWidth*2.1), GetScreenHeight()/2 + buttonHeight*4};
+        DrawTextureEx(discardCardButton, discardCardButtonPos, 0, 1, WHITE);
+        //Detect if the mouse is over the menu button
+        if(CheckCollisionPointRec(MousePos, {discardCardButtonPos.x, discardCardButtonPos.y + 4, buttonWidth, buttonHeight}))
+        {
+            SetMouseCursor(4);
+            DrawRectangle(discardCardButtonPos.x, discardCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});
+            DrawTexture(discardCardButtonPressed, discardCardButtonPos.x, placeCardButtonPos.y + 4, WHITE);
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                discardCard();
+            }     
+        }
+    }
     void displayPlayerTurn()
     {
         if(playerTurn)
@@ -705,6 +745,17 @@ namespace PvP{
         else
         {
             DrawText("Player 2's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+        }
+    }
+    void addCardOnEachTurn()
+    {
+        if(playerTurn && player1Cards.size()<5)
+        {
+            addPlayerCards(false);
+        }
+        if(!playerTurn && player2Cards.size()<5)
+        {
+            addPlayerCards(false);
         }
     }
     void setCards()
@@ -726,41 +777,14 @@ namespace PvP{
 
             drawTable();
             drawInitialBinary();
-            drawPlayerCards(MousePos);
             drawPyramids(MousePos);
+            drawPlayerCards(MousePos);
             displayPlayerTurn();
+            drawButtons(MousePos);
+            addCardOnEachTurn();
+
             //Display mouse position
             DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
-
-            DrawRectangle(1100,250,100,50,BLACK);
-            if(CheckCollisionPointRec(MousePos, {1100,250,100,50}))
-            {
-                SetMouseCursor(4);
-                DrawRectangle(1100,250,100,50,BLUE);
-                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    placeCard();
-                }
-            }
-
-            DrawRectangle(1100,650,100,50,BLACK);
-            if(CheckCollisionPointRec(MousePos, {1100,650,100,50}))
-            {
-                SetMouseCursor(4);
-                DrawRectangle(1100,650,100,50,BLUE);
-                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    discardCard();
-                }
-            }
-            if(playerTurn && player1Cards.size()<5)
-            {
-                addPlayerCards(false);
-            }
-            if(!playerTurn && player2Cards.size()<5)
-            {
-                addPlayerCards(false);
-            }
 
             //If escape key pressed return back to Main Menu
             if(IsKeyPressed(KEY_ESCAPE))
