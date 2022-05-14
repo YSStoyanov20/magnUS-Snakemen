@@ -738,7 +738,7 @@ namespace PvP{
         }
         
         Vector2 discardCardButtonPos = {GetScreenWidth()-float(buttonWidth*2.1), GetScreenHeight()/2 + buttonHeight*4};
-        DrawTextureEx(discardCardButton, discardCardButtonPos, 0, 1, WHITE);
+        DrawTexture(discardCardButton, discardCardButtonPos.x, discardCardButtonPos.y, WHITE);
         //Detect if the mouse is over the menu button
         if(CheckCollisionPointRec(MousePos, {discardCardButtonPos.x, discardCardButtonPos.y + 4, buttonWidth, buttonHeight}))
         {
