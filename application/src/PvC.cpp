@@ -147,7 +147,7 @@ namespace PvC{
     void drawButtons(Vector2 MousePos)
     {
         Vector2 placeCardButtonPos = {GetScreenWidth()-float(buttonWidth*2.1), GetScreenHeight()/2 + buttonHeight*4};
-        DrawTextureEx(placeCardButton, placeCardButtonPos, 0, 1, WHITE);
+        DrawTexture(placeCardButton, placeCardButtonPos.x, placeCardButtonPos.y, WHITE);
         if(CheckCollisionPointRec(MousePos, {placeCardButtonPos.x, placeCardButtonPos.y + 4, buttonWidth, buttonHeight}) && !gameOver)
         {
             SetMouseCursor(4);
