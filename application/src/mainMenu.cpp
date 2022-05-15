@@ -11,12 +11,14 @@ namespace mainMenu{
     Texture2D PVPButtonPressed;
     Texture2D PVCButtonUnpressed;
     Texture2D PVCButtonPressed;
+    Texture2D Background;
 
     float buttonWidth;
     float buttonHeight;
     
     void loadTextures()
     {
+        Background = LoadTexture("./Sprites/Title-screen.png");
         RuleButtonUnpressed = LoadTexture("./Sprites/Rules-Button-Unpressed.png");
         RuleButtonPressed = LoadTexture("./Sprites/Rules-Button-Pressed.png");
         QuitButtonUnpressed = LoadTexture("./Sprites/Quit-Button-Unpressed.png");
@@ -31,6 +33,7 @@ namespace mainMenu{
     }
     void unloadTextures()
     {
+        UnloadTexture(Background);
         UnloadTexture(PVCButtonPressed);
         UnloadTexture(PVCButtonUnpressed);
         UnloadTexture(PVPButtonPressed);
@@ -41,31 +44,26 @@ namespace mainMenu{
         UnloadTexture(QuitButtonPressed);
         texturesLoaded = false;
     }
-
     void loadMainMenu()
     {
         if(isInMainMenu)
         {
-            SetMouseCursor(0);
+            
             if(!texturesLoaded)
             {
                 global::unloadTextures();
                 loadTextures();
             }
-
             //Set button position
             Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, GetScreenHeight()/2 - buttonHeight*2 + 4};
 
             //Get mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
-
-            //Draw the menu button
-            DrawTexture(PVPButtonUnpressed, buttonPos.x, buttonPos.y, WHITE);
+            DrawTexture(Background, 0, 0, WHITE);
             //Detect if the mouse is over the menu button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 4, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
-                DrawRectangle(buttonPos.x, buttonPos.y, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(PVPButtonPressed, buttonPos.x, buttonPos.y + 4, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -74,14 +72,17 @@ namespace mainMenu{
                     PvP::isInPvP = true;
                 }     
             }
+            else
+            {
+                //Draw the menu button
+                DrawTexture(PVPButtonUnpressed, buttonPos.x, buttonPos.y, WHITE);
+            }
 
-            //Draw the rules button
-            DrawTexture(PVCButtonUnpressed, buttonPos.x, buttonPos.y + 100, WHITE);
+            
             //Detect if the mouse is over the rules button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 104, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
-                DrawRectangle(buttonPos.x, buttonPos.y + 100, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(PVCButtonPressed, buttonPos.x, buttonPos.y + 104, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -90,13 +91,16 @@ namespace mainMenu{
                     PvC::isInPvC = true;
                 }     
             }
+            else
+            {
+                //Draw the rules button
+                DrawTexture(PVCButtonUnpressed, buttonPos.x, buttonPos.y + 100, WHITE);
+            }
 
-            DrawTexture(RuleButtonUnpressed, buttonPos.x, buttonPos.y + 200, WHITE);
 
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 204, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
-                DrawRectangle(buttonPos.x, buttonPos.y + 200, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(RuleButtonPressed, buttonPos.x, buttonPos.y + 204, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -104,14 +108,17 @@ namespace mainMenu{
                     isInMainMenu = false;
                 }
             }
+            else
+            {
+                //draws the rule button
+                DrawTexture(RuleButtonUnpressed, buttonPos.x, buttonPos.y + 200, WHITE);
+            }
 
-            //Draw the quit button
-            DrawTexture(QuitButtonUnpressed, buttonPos.x, buttonPos.y + 300, WHITE);
+            
             //Detect if the mouse is over the quit button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 304, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
-                DrawRectangle(buttonPos.x, buttonPos.y + 300, buttonWidth, buttonHeight, RAYWHITE);
                 DrawTexture(QuitButtonPressed, buttonPos.x, buttonPos.y + 304, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -119,6 +126,12 @@ namespace mainMenu{
                     CloseWindow();
                 }    
             }
+            else
+            {
+                //Draw the quit button
+                DrawTexture(QuitButtonUnpressed, buttonPos.x, buttonPos.y + 300, WHITE);
+            }
+            
         }
         if(PvP::isInPvP)
         {
