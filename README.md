@@ -26,8 +26,13 @@ you'll be spending the most of your time writing some boring homework. All that 
 <h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/raw/main/Documentation/Test%20Plan.pdf">Test Plan </a><img src="https://cdn.worldvectorlogo.com/logos/adobe-pdf-icon.svg" alt="PDF" width="30" height="20"/> </h3>
 <h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/raw/main/Documentation/magnUS-Snakemen.pptx">Presentation </a><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"/> </h3>
 
-
-
+<h2>🖥️ System Requirements</h3>
+<p><big>CPU: Dual core Intel Celeron 1.80GHz or newer;</p>
+<p><big>GPU: Integrated or External GPU with more than 512mb VRAM;</p>
+<p><big>RAM: 512mb RAM or more;</p>
+<p><big>Disk space: 5mb;</p>
+<p><big>Other: Monitor, mouse and keyboard are required;</p>
+  
 <h2>📨 Installation</h2>
 <p><big>Download the release and run the executable</big></p>
 
@@ -45,7 +50,7 @@ you'll be spending the most of your time writing some boring homework. All that 
 
 <h2>🧍 Our Team</h2>
 <p><big><a href="https://github.com/YSStoyanov20">Yordan Stoyanov</a> - Scrum Trainer</big></p>
-<p><big><a href="https://github.com/PDMatsaliev20">Petar Matsaliev</a> - Designer/Front-end Developer</big></p>
+<p><big><a href="https://github.com/PDMatsaliev20">Petar Matsaliev</a> - Designer/Back-end Developer</big></p>
 <p><big><a href="https://github.com/SHHristov20">Stefan Hristov</a> - Back-end Developer</big></p>
 <p><big><a href="https://github.com/DVFurnika20">Daniil Furnika</a> - Quality Assurance</big></p>
 <p><big><a href="https://github.com/SSUzunov19">Stas Uzunov</a>  - Mentor</big></p>
