@@ -8,18 +8,18 @@ int main()
     InitWindow(GetScreenWidth(), GetScreenHeight(), "Booleo");
     ToggleFullscreen();
 
-    //Set icon for window
+    //Sets icon for window
     Image icon = LoadImage("./res/icon.png");
     SetWindowIcon(icon);
 
-    //Remove exit key
+    //Removes exit key
     SetExitKey(KEY_NULL);
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
         
-        //Load the main menu
+        //Loads the main menu
         mainMenu::loadMainMenu();
         EndDrawing();
     }

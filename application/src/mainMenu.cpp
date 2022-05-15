@@ -54,13 +54,13 @@ namespace mainMenu{
                 global::unloadTextures();
                 loadTextures();
             }
-            //Set button position
+            //Sets button position
             Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, float(GetScreenHeight()/2)};
 
-            //Get mouse position            
+            //Gets the mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
             DrawTexture(Background, 0, 0, WHITE);
-            //Detect if the mouse is over the menu button
+            //Detects if the mouse is over the menu button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 4, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
@@ -74,12 +74,12 @@ namespace mainMenu{
             }
             else
             {
-                //Draw the menu button
+                //Draws the menu button
                 DrawTexture(PVPButtonUnpressed, buttonPos.x, buttonPos.y, WHITE);
             }
 
             
-            //Detect if the mouse is over the rules button
+            //Detects if the mouse is over the rules button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 104, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
@@ -93,26 +93,26 @@ namespace mainMenu{
             }
             else
             {
-                //Draw the rules button
+                //Draws the rules button
                 DrawTexture(PVCButtonUnpressed, buttonPos.x, buttonPos.y + 100, WHITE);
             }
 
 
             
-            //Detect if the mouse is over the quit button
+            //Detects if the mouse is over the quit button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 204, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
                 DrawTexture(QuitButtonPressed, buttonPos.x, buttonPos.y + 204, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
-                    //Close the application
+                    //Closes the application
                     CloseWindow();
                 }    
             }
             else
             {
-                //Draw the quit button
+                //Draws the quit button
                 DrawTexture(QuitButtonUnpressed, buttonPos.x, buttonPos.y + 200, WHITE);
             }
             
