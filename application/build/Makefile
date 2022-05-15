@@ -13,4 +13,5 @@ LIBDIR=../lib
 ERRFLAGS=-O2 -Wall -Wno-missing-braces
 
 all:
-	g++ ../main.cpp $(SRC) -o $(OUTPUT) $(ERRFLAGS) -I $(HEADERDIR) -L $(LIBDIR) $(LIBS)
+	windres -i res/icon.rc -o res/icon.o
+	g++ ../main.cpp $(SRC) res/icon.o -o $(OUTPUT) $(ERRFLAGS) -I $(HEADERDIR) -L $(LIBDIR) $(LIBS)

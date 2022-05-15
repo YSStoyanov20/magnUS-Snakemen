@@ -8,6 +8,10 @@ int main()
     InitWindow(GetScreenWidth(), GetScreenHeight(), "Booleo");
     ToggleFullscreen();
 
+    //Set icon for window
+    Image icon = LoadImage("./res/icon.png");
+    SetWindowIcon(icon);
+
     //Remove exit key
     SetExitKey(KEY_NULL);
     while (!WindowShouldClose())
