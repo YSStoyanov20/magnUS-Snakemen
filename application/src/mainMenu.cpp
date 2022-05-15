@@ -53,9 +53,6 @@ namespace mainMenu{
             //Get mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
 
-            //Display mouse position
-            DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
-
             //Draw the menu button
             DrawTexture(MenuButtonUnpressed, buttonPos.x, buttonPos.y, WHITE);
             //Detect if the mouse is over the menu button

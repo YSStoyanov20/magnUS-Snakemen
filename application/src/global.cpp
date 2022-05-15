@@ -579,7 +579,7 @@ namespace global{
             addPlayerCards(false);
         }
     }
-    
+
     void hasPlayerWon()
     {
         if(player1Pyramid[4][0].id!=0)
@@ -591,7 +591,14 @@ namespace global{
         if(player2Pyramid[4][0].id!=0)
         {
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), { 0, 0, 0, 220 });
-            DrawText("Player 2 wins", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
+            if(PvC::isInPvC)
+            {
+                DrawText("Computer wins!", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
+            }
+            if(PvP::isInPvP)
+            {
+                DrawText("Player 2 wins!", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
+            }
             DrawText("Press ESC to exit", GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 180, 40, WHITE);
         }
     }

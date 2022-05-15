@@ -221,9 +221,6 @@ namespace PvP{
             addCardOnEachTurn();
             hasPlayerWon();
 
-            //Display mouse position
-            DrawText(TextFormat("%0.f, %0.f", MousePos.x, MousePos.y), 10, 10, 20, BLACK);
-
             //If escape key pressed return back to Main Menu
             if(IsKeyPressed(KEY_ESCAPE))
             {
