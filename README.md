@@ -21,7 +21,7 @@ you'll be spending the most of your time writing some boring homework. All that 
 
 <h2>📄 Documentation</h2>
 <h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/raw/main/Documentation/Documentation.docx">Documentation </a><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"/> </h3>
-<h3> ➤ <a href="-------------------------">QA Documentation </a><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width="30" height="20"/> </h3>
+<h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/blob/main/Documentation/QA_documentation.xlsx">QA Documentation </a><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width="30" height="20"/> </h3>
 <h3> ➤ <a href="https://calm-alfajores-c98d4d.netlify.app/">Doxygen </a><img src="https://i.imgur.com/dnS9sDb.png" alt="Doxygen" width="20" height="20"/> </h3>
 <h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/raw/main/Documentation/Test%20Plan.pdf">Test Plan </a><img src="https://cdn.worldvectorlogo.com/logos/adobe-pdf-icon.svg" alt="PDF" width="30" height="20"/> </h3>
 <h3> ➤ <a href="https://github.com/YSStoyanov20/magnUS-Snakemen/raw/main/Documentation/magnUS-Snakemen.pptx">Presentation </a><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"/> </h3>
