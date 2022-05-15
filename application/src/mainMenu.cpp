@@ -55,7 +55,7 @@ namespace mainMenu{
                 loadTextures();
             }
             //Set button position
-            Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, GetScreenHeight()/2 - buttonHeight*2 + 4};
+            Vector2 buttonPos = {GetScreenWidth()/2 - buttonWidth/2, float(GetScreenHeight()/2)};
 
             //Get mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
