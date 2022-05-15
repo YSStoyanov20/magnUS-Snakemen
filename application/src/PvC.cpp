@@ -13,7 +13,7 @@ namespace PvC{
         {
             DrawTextureEx(player1Cards[i], player1CardsPos, 0, 1, WHITE);
             //Check if mouse is over a card
-            if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}))
+            if(CheckCollisionPointRec(MousePos, {player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}) && !gameOver)
             {
                 SetMouseCursor(4);
                 DrawRectangleLinesEx({player1CardsPos.x, player1CardsPos.y, cardWidth, cardHeight}, 2.6, RED);
@@ -58,7 +58,7 @@ namespace PvC{
                 DrawTexture(placeHolder, pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, WHITE);
 
                 //Check if mouse is over a rectangle
-                if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0)
+                if(CheckCollisionPointRec(MousePos, {pyramidPos1.x - cardWidth, pyramidPos1.y - cardHeight, cardWidth, cardHeight}) && player1Pyramid[i][j].id == 0 && !gameOver)
                 {
                     SetMouseCursor(4);
                     //Outline selected card
@@ -122,7 +122,7 @@ namespace PvC{
                 pyramidPos2.x = GetScreenWidth()/2 - cardWidth*2 - spaceBetween;
                 for(int k = 0; k < row; k++)
                 {
-                    if(((row == 5 && player2Pyramid[j][k].id == 0) || (player2Pyramid[j-1][k].id != 0 && player2Pyramid[j-1][k+1].id != 0)) && !playerTurn)
+                    if(((row == 5 && player2Pyramid[j][k].id == 0) || (player2Pyramid[j-1][k].id != 0 && player2Pyramid[j-1][k+1].id != 0)) && !playerTurn && !gameOver)
                     {
                         if(player2Pyramid[j][k].id == 0)
                         {
@@ -148,7 +148,7 @@ namespace PvC{
     {
         Vector2 placeCardButtonPos = {GetScreenWidth()-float(buttonWidth*2.1), GetScreenHeight()/2 + buttonHeight*4};
         DrawTextureEx(placeCardButton, placeCardButtonPos, 0, 1, WHITE);
-        if(CheckCollisionPointRec(MousePos, {placeCardButtonPos.x, placeCardButtonPos.y + 4, buttonWidth, buttonHeight}))
+        if(CheckCollisionPointRec(MousePos, {placeCardButtonPos.x, placeCardButtonPos.y + 4, buttonWidth, buttonHeight}) && !gameOver)
         {
             SetMouseCursor(4);
             DrawRectangle(placeCardButtonPos.x, placeCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});
@@ -161,7 +161,7 @@ namespace PvC{
         
         Vector2 discardCardButtonPos = {float(buttonWidth*1.2), GetScreenHeight()/2 + buttonHeight*4};
         DrawTexture(discardCardButton, discardCardButtonPos.x, discardCardButtonPos.y, WHITE);
-        if(CheckCollisionPointRec(MousePos, {discardCardButtonPos.x, discardCardButtonPos.y + 4, buttonWidth, buttonHeight}))
+        if(CheckCollisionPointRec(MousePos, {discardCardButtonPos.x, discardCardButtonPos.y + 4, buttonWidth, buttonHeight}) && !gameOver)
         {
             SetMouseCursor(4);
             DrawRectangle(discardCardButtonPos.x, discardCardButtonPos.y, buttonWidth, buttonHeight, {55, 148, 110, 255});

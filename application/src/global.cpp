@@ -1,7 +1,7 @@
 #include "global.h"
 namespace global{
     bool texturesLoaded = false;
-
+    bool gameOver = false;
     //Initialize the all textures
     Texture2D table;
     Texture2D cardBack;
@@ -111,6 +111,8 @@ namespace global{
 
         //Reset player turn
         playerTurn = true;
+
+        gameOver = false;
 
         texturesLoaded = true;
     }
@@ -587,6 +589,7 @@ namespace global{
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), { 0, 0, 0, 220 });
             DrawText("Player 1 wins!", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
             DrawText("Press ESC to exit", GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 180, 40, WHITE);
+            gameOver = true;
         }
         if(player2Pyramid[4][0].id!=0)
         {
@@ -600,6 +603,7 @@ namespace global{
                 DrawText("Player 2 wins!", GetScreenWidth()/2 - 330, GetScreenHeight()/2 - 300, 100, WHITE);
             }
             DrawText("Press ESC to exit", GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 180, 40, WHITE);
+            gameOver = true;
         }
     }
 };

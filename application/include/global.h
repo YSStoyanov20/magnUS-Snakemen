@@ -6,7 +6,7 @@
 #include <time.h>
 namespace global{
     extern bool texturesLoaded;
-
+    extern bool gameOver;
     //Initialize the all textures
     extern Texture2D table;
     extern Texture2D cardBack;
