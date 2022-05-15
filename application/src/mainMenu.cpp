@@ -98,28 +98,12 @@ namespace mainMenu{
             }
 
 
+            
+            //Detect if the mouse is over the quit button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 204, buttonWidth, buttonHeight}))
             {
                 SetMouseCursor(4);
-                DrawTexture(RuleButtonPressed, buttonPos.x, buttonPos.y + 204, WHITE);
-                if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    unloadTextures();
-                    isInMainMenu = false;
-                }
-            }
-            else
-            {
-                //draws the rule button
-                DrawTexture(RuleButtonUnpressed, buttonPos.x, buttonPos.y + 200, WHITE);
-            }
-
-            
-            //Detect if the mouse is over the quit button
-            if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 304, buttonWidth, buttonHeight}))
-            {
-                SetMouseCursor(4);
-                DrawTexture(QuitButtonPressed, buttonPos.x, buttonPos.y + 304, WHITE);
+                DrawTexture(QuitButtonPressed, buttonPos.x, buttonPos.y + 204, WHITE);
                 if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     //Close the application
@@ -129,7 +113,7 @@ namespace mainMenu{
             else
             {
                 //Draw the quit button
-                DrawTexture(QuitButtonUnpressed, buttonPos.x, buttonPos.y + 300, WHITE);
+                DrawTexture(QuitButtonUnpressed, buttonPos.x, buttonPos.y + 200, WHITE);
             }
             
         }
