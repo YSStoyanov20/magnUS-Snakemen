@@ -18,15 +18,15 @@ namespace mainMenu{
     
     void loadTextures()
     {
-        Background = LoadTexture("./Sprites/Title-screen.png");
-        RuleButtonUnpressed = LoadTexture("./Sprites/Rules-Button-Unpressed.png");
-        RuleButtonPressed = LoadTexture("./Sprites/Rules-Button-Pressed.png");
-        QuitButtonUnpressed = LoadTexture("./Sprites/Quit-Button-Unpressed.png");
-        QuitButtonPressed = LoadTexture("./Sprites/Quit-Button-Pressed.png");
-        PVPButtonUnpressed = LoadTexture("./Sprites/PVP-button-Unpressed.png");
-        PVPButtonPressed = LoadTexture("./Sprites/PVP-button-Pressed.png");
-        PVCButtonPressed = LoadTexture("./Sprites/PVC-button-Pressed.png");
-        PVCButtonUnpressed = LoadTexture("./Sprites/PVC-button-Unpressed.png");
+        Background = LoadTexture("./res/Title-screen.png");
+        RuleButtonUnpressed = LoadTexture("./res/Rules-Button-Unpressed.png");
+        RuleButtonPressed = LoadTexture("./res/Rules-Button-Pressed.png");
+        QuitButtonUnpressed = LoadTexture("./res/Quit-Button-Unpressed.png");
+        QuitButtonPressed = LoadTexture("./res/Quit-Button-Pressed.png");
+        PVPButtonUnpressed = LoadTexture("./res/PVP-button-Unpressed.png");
+        PVPButtonPressed = LoadTexture("./res/PVP-button-Pressed.png");
+        PVCButtonPressed = LoadTexture("./res/PVC-button-Pressed.png");
+        PVCButtonUnpressed = LoadTexture("./res/PVC-button-Unpressed.png");
         buttonWidth = PVPButtonPressed.width;
         buttonHeight = PVPButtonPressed.height;
         texturesLoaded = true;

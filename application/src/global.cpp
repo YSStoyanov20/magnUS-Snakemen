@@ -56,21 +56,21 @@ namespace global{
     void loadTextures()
     {
         //Load all textures
-        cardBack = LoadTexture("./Sprites/Deck.png");
-        table = LoadTexture("./Sprites/Table.png");
-        initialBinary = LoadTexture("./Sprites/Initial-Binaries-Reverse.png");
-        initialBinaryFlipped = LoadTexture("./Sprites/Initial-Binaries.png");
-        andCard0 = LoadTexture("./Sprites/And-Zero-Card.png"); // ID = 7
-        andCard1 = LoadTexture("./Sprites/And-One-Card.png"); // ID = 8
-        orCard0 = LoadTexture("./Sprites/Or-Zero-Card.png"); // ID = 9
-        orCard1 = LoadTexture("./Sprites/Or-One-Card.png"); // ID = 10
-        xorCard0 = LoadTexture("./Sprites/XOR-Zero-Card.png"); // ID = 11
-        xorCard1 = LoadTexture("./Sprites/XOR-One-Card.png"); // ID = 12
-        placeHolder = LoadTexture("./Sprites/placeHolder-Card.png");
-        placeCardButton = LoadTexture("./Sprites/Place-Button-Unpressed.png");
-        placeCardButtonPressed = LoadTexture("./Sprites/Place-Button-Pressed.png");
-        discardCardButton = LoadTexture("./Sprites/Discard-Button-Unpressed.png");
-        discardCardButtonPressed = LoadTexture("./Sprites/Discard-Button-Pressed.png");
+        cardBack = LoadTexture("./res/Deck.png");
+        table = LoadTexture("./res/Table.png");
+        initialBinary = LoadTexture("./res/Initial-Binaries-Reverse.png");
+        initialBinaryFlipped = LoadTexture("./res/Initial-Binaries.png");
+        andCard0 = LoadTexture("./res/And-Zero-Card.png"); // ID = 7
+        andCard1 = LoadTexture("./res/And-One-Card.png"); // ID = 8
+        orCard0 = LoadTexture("./res/Or-Zero-Card.png"); // ID = 9
+        orCard1 = LoadTexture("./res/Or-One-Card.png"); // ID = 10
+        xorCard0 = LoadTexture("./res/XOR-Zero-Card.png"); // ID = 11
+        xorCard1 = LoadTexture("./res/XOR-One-Card.png"); // ID = 12
+        placeHolder = LoadTexture("./res/placeHolder-Card.png");
+        placeCardButton = LoadTexture("./res/Place-Button-Unpressed.png");
+        placeCardButtonPressed = LoadTexture("./res/Place-Button-Pressed.png");
+        discardCardButton = LoadTexture("./res/Discard-Button-Unpressed.png");
+        discardCardButtonPressed = LoadTexture("./res/Discard-Button-Pressed.png");
 
         //Set the card width and height
         cardWidth = initialBinary.width;
