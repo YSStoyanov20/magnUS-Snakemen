@@ -3,7 +3,7 @@
 </p>
 <h1 align = "center"> 『🐍』magnUS-Snakemen『🐍』 </h1>
 <p align = "center">
-<img src = "https://img.shields.io/github/contributors/YSStoyanov/magnUS-Snakemen?style=for-the-badge">
+<img src = "https://img.shields.io/github/contributors/YSStoyanov20/magnUS-Snakemen?style=for-the-badge">
 <img src = "https://img.shields.io/github/repo-size/YSStoyanov20/magnUS-Snakemen?style=for-the-badge">
 <img src = "https://img.shields.io/github/last-commit/YSStoyanov20/magnUS-Snakemen?style=for-the-badge">
 </p>
