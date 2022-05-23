@@ -1,7 +1,9 @@
 #include "global.h"
+#include <iostream>
 namespace global{
     bool texturesLoaded = false;
     bool gameOver = false;
+
     //Initialize the all textures
     Texture2D table;
     Texture2D cardBack;
@@ -53,6 +55,11 @@ namespace global{
     //Initialize pyramid positions
     int selectedPyramidPos[2];
 
+    float scale()
+    {
+        return (float)GetScreenWidth()/1920.0f;
+    }
+
     void loadTextures()
     {
         //Load all textures
@@ -73,12 +80,12 @@ namespace global{
         discardCardButtonPressed = LoadTexture("./res/Discard-Button-Pressed.png");
 
         //Set the card width and height
-        cardWidth = initialBinary.width;
-        cardHeight = initialBinary.height;
+        cardWidth = initialBinary.width*scale();
+        cardHeight = initialBinary.height*scale();
 
         //Set the button width and height
-        buttonWidth = discardCardButton.width;
-        buttonHeight = discardCardButton.height;
+        buttonWidth = discardCardButton.width*scale();
+        buttonHeight = discardCardButton.height*scale();
 
         //Define deck
         andCards0 = {andCard0, andCard0, andCard0, andCard0, andCard0, andCard0, andCard0, andCard0};
@@ -160,19 +167,20 @@ namespace global{
         {
             if(initialBinaries[i]==0)
             {
-                DrawTextureEx(initialBinary, initialBinaryPos, 0, 1, WHITE);
+                DrawTextureEx(initialBinary, initialBinaryPos, 0, scale(), WHITE);
             }
             else
             {
-                DrawTextureEx(initialBinaryFlipped, initialBinaryPos, 0, 1, WHITE);
+                DrawTextureEx(initialBinaryFlipped, initialBinaryPos, 0, scale(), WHITE);
             }
             initialBinaryPos.x+=cardWidth+5;
         }
     }
     void drawTable()
     {
+        std::cout << cardWidth << std::endl;
         //Draw the table
-        DrawTexture(table, 0, 0, WHITE);
+        DrawTextureEx(table, {0, 0}, 0, scale(), WHITE);
         DrawRectangleLinesEx({GetScreenWidth()/2 - cardWidth*3 - 5, GetScreenHeight()/2 - cardHeight/2 - 5, cardWidth*6 + 35, cardHeight + 10}, 2.6, WHITE);
     }
 
@@ -555,17 +563,17 @@ namespace global{
     {
         if(playerTurn)
         {
-            DrawText("Player 1's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+            DrawText("Player 1's turn", GetScreenWidth() - 300*scale(), 60*scale(), 30*scale(), BLACK);
         }
         else
         {
             if(PvP::isInPvP)
             {
-                DrawText("Player 2's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+                DrawText("Player 2's turn", GetScreenWidth() - 300*scale(), 60*scale(), 30*scale(), BLACK);
             }
             if(PvC::isInPvC)
             {
-                DrawText("Computer's turn", GetScreenWidth() - 300, 60, 30, BLACK);
+                DrawText("Computer's turn", GetScreenWidth() - 300*scale(), 60*scale(), 30*scale(), BLACK);
             }
         }
     }

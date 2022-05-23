@@ -1,4 +1,5 @@
 #include "mainMenu.h"
+#include <iostream>
 namespace mainMenu{
     bool isInMainMenu = true;
     bool texturesLoaded = false;
@@ -59,7 +60,7 @@ namespace mainMenu{
 
             //Gets the mouse position            
             Vector2 MousePos = {GetMousePosition().x, GetMousePosition().y};
-            DrawTexture(Background, 0, 0, WHITE);
+            DrawTextureEx(Background, {0, 0}, 0, global::scale(), WHITE);
             //Detects if the mouse is over the menu button
             if(CheckCollisionPointRec(MousePos, {buttonPos.x, buttonPos.y + 4, buttonWidth, buttonHeight}))
             {

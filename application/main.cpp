@@ -1,5 +1,4 @@
 #include "mainMenu.h"
-
 int main()
 {   
 
@@ -7,7 +6,6 @@ int main()
     SetConfigFlags(FLAG_VSYNC_HINT);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "Booleo");
     ToggleFullscreen();
-
     //Sets icon for window
     Image icon = LoadImage("./res/icon.png");
     SetWindowIcon(icon);
@@ -18,7 +16,7 @@ int main()
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        
+
         //Loads the main menu
         mainMenu::loadMainMenu();
         EndDrawing();
